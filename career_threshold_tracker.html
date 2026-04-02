@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kel — Career Threshold Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+:root {
+  --purple: #6b3fd4;
+  --purple-bg: #f3f0ff;
+  --blue: #0a66c2;
+  --blue-bg: #e8f3ff;
+  --amber: #b54708;
+  --amber-bg: #fdf4e8;
+  --pink: #b2407a;
+  --pink-bg: #fceef5;
+  --green: #057642;
+  --green-bg: #e6f4ec;
+  --coral: #b24020;
+  --coral-bg: #fdf0ec;
+  --shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 0 0 1px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.hero { padding: 1.25rem 0 1.25rem; }
+.hero-name { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.hero-title { font-size: 28px; font-weight: 600; color: var(--text); line-height: 1.2; letter-spacing: -0.02em; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-top: 8px; line-height: 1.5; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 1.25rem 0;
+}
+.stat {
+  background: var(--bg2);
+  border: none;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+}
+.stat-label { font-size: 11px; color: var(--text3); font-weight: 400; margin-bottom: 2px; }
+.stat-value { font-size: 22px; font-weight: 500; font-family: var(--mono); }
+.stat-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.master-bar {
+  background: var(--bg2);
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+.mb-track { width: 100%; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; margin: 6px 0 4px; }
+.mb-fill { height: 100%; border-radius: 3px; background: var(--accent); transition: width 0.35s ease; }
+.mb-label { font-size: 11px; color: var(--text3); display: flex; justify-content: space-between; }
+
+.sec { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin: 1.75rem 0 0.6rem; padding-left: 2px; }
+
+.cc {
+  background: var(--bg2);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 18px 20px 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s;
+}
+.cc:hover { box-shadow: var(--shadow-card-hover); }
+
+.cc-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+.cc-name { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; padding-right: 12px; }
+.cc-pct { font-size: 20px; font-weight: 500; font-family: var(--mono); min-width: 56px; text-align: right; }
+.cc-inst { font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+
+.cc input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg3);
+  outline: none;
+  cursor: pointer;
+}
+.cc input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  cursor: grab;
+}
+.cc input[type=range]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  cursor: grab;
+}
+.cc input[type=range]:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.15); }
+
+.bar-wrap { margin-top: 8px; }
+.bar-track { width: 100%; height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 2px; transition: width 0.2s ease; }
+
+.ms { font-size: 12px; color: var(--text2); margin-top: 5px; padding: 5px 8px; border-radius: 6px; display: none; line-height: 1.4; }
+.ms.next { display: block; background: var(--bg3); }
+.ms.done { display: block; background: var(--accent-bg); color: var(--accent); }
+.ms .pct-tag { font-family: var(--mono); font-size: 11px; font-weight: 500; }
+.ms .gap { opacity: 0.5; font-size: 11px; }
+
+.roles-panel {
+  background: var(--bg2);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+.rp-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+.rg { display: flex; flex-wrap: wrap; gap: 6px; }
+.rt {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+.rt.new { background: var(--accent-bg); color: var(--accent-hover); border: 1px solid rgba(10, 102, 194, 0.35); }
+.rt.base { background: var(--bg3); color: var(--text2); border: none; }
+.rt.locked { background: transparent; color: var(--text3); border: 1px dashed var(--border); opacity: 0.55; }
+
+.actions {
+  background: var(--bg2);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-top: 12px;
+  box-shadow: var(--shadow-card);
+}
+.actions-title { font-size: 13px; font-weight: 600; color: var(--text3); margin-bottom: 10px; }
+.act {
+  font-size: 14px;
+  color: var(--text);
+  padding: 8px 0;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--border);
+}
+.act:last-child { border-bottom: none; }
+.act-num { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 600; margin-right: 8px; }
+
+.save-note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--border);
+}
+.save-note a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.save-note a:hover { text-decoration: underline; }
+
+.baseline { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 0.5rem; }
+.bp { font-size: 11px; padding: 4px 10px; border-radius: 24px; background: var(--bg3); color: var(--text2); font-weight: 500; }
+
+.reset-btn {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.2s;
+  box-shadow: var(--shadow-card);
+}
+.reset-btn:hover { border-color: var(--coral); color: var(--coral); background: var(--coral-bg); }
+
+.cp-panel {
+  background: var(--bg2);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin: 1.25rem 0;
+  box-shadow: var(--shadow-card);
+}
+.cp-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.cp-sub { font-size: 11px; color: var(--text3); margin-bottom: 14px; line-height: 1.45; }
+.cp-list { display: flex; flex-direction: column; gap: 10px; }
+.cp-row {
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  border: none;
+  background: var(--bg3);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.cp-row.on { box-shadow: 0 0 0 1px var(--accent); background: var(--accent-bg); }
+.cp-row.near { box-shadow: 0 0 0 1px var(--border-hi); }
+.cp-h { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.cp-meta { font-size: 11px; color: var(--text2); line-height: 1.45; }
+.cp-meta .mono { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+.cp-roles { font-size: 11px; color: var(--purple); margin-top: 6px; }
+.cp-gap { font-size: 11px; color: var(--amber); margin-top: 4px; }
+
+.proj-panel {
+  background: var(--bg2);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+.proj-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.proj-intro { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 12px; }
+.academic-panel .proj-title { font-size: 16px; font-weight: 600; }
+.phd-geo-h {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1rem 0 6px;
+}
+.phd-geo-h:first-of-type { margin-top: 4px; }
+.phd-geo-list {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+  margin: 0 0 10px 1.1rem;
+  padding: 0;
+}
+.phd-geo-list li { margin-bottom: 6px; }
+.phd-geo-note {
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.5;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.proj-foundations { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+.pf {
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg3);
+  color: var(--text2);
+  border: 0.5px solid var(--border);
+}
+.pi-stack { margin-top: 1.1rem; }
+.pi-stack:first-of-type { margin-top: 0.25rem; }
+.pi-stack-h {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-family: var(--mono);
+  letter-spacing: -0.02em;
+}
+.pi-stack-sub { font-size: 11px; color: var(--text3); font-weight: 400; font-family: var(--font); margin-top: 2px; }
+.pi-rows { border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg3); }
+.pi-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 10px 14px;
+  padding: 10px 12px;
+  border-bottom: 0.5px solid var(--border);
+  align-items: start;
+}
+.pi-row:last-child { border-bottom: none; }
+.pi-lvl {
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  width: fit-content;
+  line-height: 1.3;
+}
+.pi-lvl.beg { background: var(--accent-bg); color: var(--accent); }
+.pi-lvl.int { background: var(--blue-bg); color: var(--blue); }
+.pi-lvl.adv { background: var(--purple-bg); color: var(--purple); }
+.pi-desc { font-size: 12px; color: var(--text2); line-height: 1.45; }
+@media (max-width: 520px) {
+  .pi-row { grid-template-columns: 1fr; }
+}
+
+.ct-wrap { overflow-x: auto; margin: 12px 0 1rem; -webkit-overflow-scrolling: touch; }
+.ct {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 11px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg3);
+}
+.ct th, .ct td { padding: 8px 10px; text-align: left; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+.ct th { background: var(--bg2); color: var(--text3); font-weight: 500; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+.ct tr:last-child td { border-bottom: none; }
+.ct td:first-child { color: var(--text); font-weight: 500; font-size: 11px; max-width: 220px; }
+.ct .ins { display: block; color: var(--text3); font-size: 10px; font-weight: 400; margin-top: 3px; line-height: 1.35; }
+.ct .tech { color: var(--text2); line-height: 1.45; }
+.combo-cap-h { font-size: 13px; font-weight: 600; color: var(--text); margin: 1rem 0 10px; }
+.combo-card {
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  background: var(--bg3);
+}
+.combo-num { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.combo-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 8px; line-height: 1.35; }
+.combo-lines { font-size: 11px; color: var(--text2); line-height: 1.5; }
+.combo-lines strong { color: var(--text); font-weight: 500; }
+.combo-course { margin: 6px 0 0; padding: 6px 0 0; border-top: 0.5px solid var(--border); font-size: 10px; color: var(--text3); line-height: 1.5; }
+.combo-course em { color: var(--text2); font-style: normal; }
+
+.compound-panel { margin-top: 1.5rem; }
+.compound-intro { font-size: 12px; color: var(--text2); line-height: 1.55; margin-bottom: 1rem; }
+.compound-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 10px;
+  color: var(--text3);
+  line-height: 1.4;
+}
+.compound-legend span { padding: 6px 10px; border-radius: var(--radius); background: var(--bg3); border: 0.5px solid var(--border); }
+.tier-block {
+  border: none;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: var(--bg2);
+  box-shadow: var(--shadow-card);
+}
+.tier-block.t1 { border-left: 4px solid var(--text3); }
+.tier-block.t2 { border-left: 4px solid #6A7A74; }
+.tier-block.t3 { border-left: 4px solid var(--teal-dim); }
+.tier-block.t4 { border-left: 4px solid var(--teal); }
+.tier-block.t5 { border-left: 4px solid var(--blue); }
+.tier-block.t6 { border-left: 4px solid var(--purple); }
+.tier-block.t7 { border-left: 4px solid var(--amber); }
+.tier-block.t8 { border-left: 4px solid var(--pink); }
+.tier-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg3);
+  border-bottom: 0.5px solid var(--border);
+}
+.tier-num {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 28px;
+}
+.tier-head-text { flex: 1; min-width: 0; }
+.tier-name { font-size: 14px; font-weight: 600; color: var(--text); margin: 0 0 4px; line-height: 1.25; }
+.tier-hint { font-size: 11px; color: var(--text3); margin: 0; line-height: 1.4; }
+.tier-count { font-family: var(--mono); font-size: 10px; color: var(--text3); white-space: nowrap; padding-top: 4px; }
+.tier-projects { padding: 0; }
+.cp-proj { border-bottom: 0.5px solid var(--border); }
+.cp-proj:last-child { border-bottom: none; }
+.cp-proj summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--text);
+  transition: background 0.15s;
+}
+.cp-proj summary::-webkit-details-marker { display: none; }
+.cp-proj summary::marker { content: ""; }
+.cp-proj summary:hover { background: var(--bg3); }
+.cp-proj[open] summary { background: var(--bg3); border-bottom: 0.5px solid var(--border); }
+.cp-proj-num { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+.cp-proj-title { font-weight: 500; color: var(--text2); line-height: 1.35; }
+.cp-proj-body { padding: 0 14px 14px 14px; padding-left: 52px; }
+.cp-proj-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text3);
+  margin: 10px 0 4px;
+}
+.cp-proj-label:first-child { margin-top: 4px; }
+.cp-proj-text { font-size: 11px; color: var(--text2); line-height: 1.5; margin: 0; }
+@media (max-width: 520px) {
+  .cp-proj-body { padding-left: 14px; }
+  .tier-head { flex-wrap: wrap; }
+  .tier-count { width: 100%; padding-top: 8px; }
+}
+
+.stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.stage-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: 1fr; }
+  .hero-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="site-brand-link">Kel — Toolkit</a>
+  <a href="career_threshold_tracker.html" class="nav-hi">Tracker</a>
+  <a href="curriculum.html">160 projects</a>
+  <a href="capstones.html">Udemy capstones</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-name">Kelvin R. Tobias</div>
+  <div class="hero-title">Career threshold tracker</div>
+  <div class="hero-sub">Aspiring <strong>PhD in computational biology</strong> (bioinformatics specialization; thesis niche: <strong>latent-based directed evolution / LDE</strong>). <strong>M.S. AI Engineering</strong> starts <strong>December 2026</strong>. Drag course sliders to see roles, salary bands, and next moves update.</div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-label">Salary range</div>
+    <div class="stat-value" id="sal" style="color:var(--teal)">$55K–$75K</div>
+    <div class="stat-sub" id="sal-delta"></div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Roles unlocked</div>
+    <div class="stat-value" id="role-count" style="color:var(--purple)">4</div>
+    <div class="stat-sub" id="role-total">of 45</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Stage</div>
+    <div class="stat-value" id="stage-num" style="color:var(--blue)">0</div>
+    <div class="stat-sub" id="stage-label">Baseline</div>
+  </div>
+</div>
+
+<div class="cp-panel" id="career-paths-panel">
+  <div class="cp-title">Career paths &amp; course combinations</div>
+  <div class="cp-sub">Updates as you move each course slider — salary at top reflects the strongest unlocked band from your stack.</div>
+  <div class="cp-list" id="career-paths"></div>
+</div>
+
+<div class="master-bar">
+  <div class="mb-label"><span id="mb-text">Overall progress</span><span id="mb-pct">0%</span></div>
+  <div class="mb-track"><div class="mb-fill" id="mb-fill"></div></div>
+  <div class="mb-label"><span id="mb-course-count">Across all courses</span><span id="mb-hrs"></span></div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+  <div class="sec" style="margin:0;">Your resume credentials</div>
+</div>
+<div class="baseline" id="baseline"></div>
+
+<div class="proj-panel academic-panel" style="margin-top:1.25rem">
+  <div class="proj-title">Academic focus &amp; PhD geography</div>
+  <p class="proj-intro" style="margin-bottom:0">
+    <strong>Field:</strong> computational biology (degree target)<br>
+    <strong>Specialization:</strong> bioinformatics<br>
+    <strong>Research niche (thesis territory):</strong> latent-based directed evolution (LDE)<br>
+    <strong>Bridge degree:</strong> M.S. AI Engineering — begins Dec 2026<br>
+    <strong>Home base:</strong> Kinston, NC
+  </p>
+  <p class="phd-geo-h">Best geography for a comp-bio / LDE PhD (from Kinston, NC)</p>
+  <ul class="phd-geo-list">
+    <li><strong>Research Triangle, NC (~1–1.5 hr)</strong> — Usually the strongest fit while staying regional: Duke, UNC Chapel Hill, NCSU — dense genomics, structural biology, ML-for-proteins, and directed-evolution adjacent groups.</li>
+    <li><strong>Charlotte / Wake Forest / broader NC</strong> — Worth a targeted search if a specific PI matches LDE + your methods stack; fewer default options than the Triangle.</li>
+    <li><strong>Atlanta (~6 hr)</strong> — Emory, Georgia Tech, CDC-adjacent work — good if you expand the Southeast radius.</li>
+    <li><strong>National research hubs (relocation)</strong> — <strong>Boston/Cambridge</strong> (Broad, MIT, Harvard); <strong>SF Bay Area</strong> (Stanford, UCSF, Berkeley); <strong>San Diego</strong> (UCSD, Salk); <strong>Seattle</strong> (UW, Fred Hutch); <strong>DC–Maryland</strong> (NIH, JHU, UMD) — maximize advisor match for latent models + protein/engineering biology.</li>
+  </ul>
+  <p class="phd-geo-note">Salary bands in this tracker assume <strong>industry-style total comp</strong> for the US; graduate stipends are typically much lower (~$35K–$55K depending on program/cost of living). Post-PhD comp in biotech/pharma/tech can align with the upper bands when DL + domain depth match.</p>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+  <div class="sec" style="margin:0;">Course progress</div>
+  <button class="reset-btn" id="reset-btn">Reset all</button>
+</div>
+<div id="courses"></div>
+
+<div class="roles-panel">
+  <div class="rp-title">Qualified roles</div>
+  <div class="stage-badge" id="stage-badge"><div class="stage-dot"></div><span></span></div>
+  <div class="rg" id="roles"></div>
+</div>
+
+<div class="actions" id="actions-panel">
+  <div class="actions-title">Highest-leverage next moves</div>
+  <div id="action-list"></div>
+</div>
+
+<div class="proj-panel" style="margin-top:1.5rem">
+  <div class="proj-title">Portfolio curriculum &amp; Udemy capstones</div>
+  <p class="proj-intro" style="margin-bottom:0">
+    <strong><a href="curriculum.html" class="text-link">160 compounding projects + LLM prompts</a></strong> (eight tier pages).
+    <strong><a href="capstones.html" class="text-link">Udemy capstones + course-level prompts</a></strong> — combos, course table, and copy-paste mentor text per course.
+  </p>
+</div>
+
+<div class="save-note">
+  Progress auto-saves to your browser. Open <code style="font-family:var(--mono);font-size:10px">index.html</code> for the site map, or bookmark this tracker.
+</div>
+
+<script>
+const STORAGE_KEY = "kel_threshold_v5";
+
+const baselineSkills = [
+  "C#/.NET (Expert)","MudBlazor","T-SQL / SQL Server","Python","Bash","PowerShell",
+  "Epicor ERP","Lawson Financial","Power BI","SSMS","Jira/Confluence","Linux (RHEL)",
+  "AWS","Azure","Docker","Ansible","CI/CD","Security+","Linux+","AWS SA","ITIL 4",
+  "B.S. SWE (WGU, 3x Excellence)",
+  "M.S. AI Engineering — starts Dec 2026",
+  "PhD goal: computational biology · bioinformatics · LDE thesis niche",
+  "Kinston, NC"
+];
+
+const courses = [
+  {id:"intro_python",nm:"Introduction To Python Programming",inst:"Avinash Jain, The Codex",pct:0,col:"#0d8f5c",bg:"#d8f0e6",cat:"python",
+   ms:[{at:20,t:"Syntax, control flow, functions"},{at:45,t:"Data structures + OOP intro"},{at:70,t:"Modules, files, small projects"},{at:100,t:"Course complete — Python fundamentals"}]},
+  {id:"automate_boring",nm:"Automate the Boring Stuff with Python Programming",inst:"Al Sweigart",pct:2,col:"#5a9a3a",bg:"#e8f2e0",cat:"python",
+   ms:[{at:25,t:"Regex, file automation, web scraping intro"},{at:50,t:"Excel/CSV, PDFs, scheduling"},{at:75,t:"Email/SMS automation, image work"},{at:100,t:"Full practical automation toolkit"}]},
+  {id:"mega",nm:"The Python Mega Course: Build 10 Real World Applications",inst:"Ardit Sulce • 600,000+ Students Worldwide",pct:2,col:"#0d8f5c",bg:"#d8f0e6",cat:"python",
+   ms:[{at:20,t:"Core Python + file handling + automation"},{at:50,t:"Web apps + Flask + databases"},{at:80,t:"APIs + data pipelines + web scraping"},{at:100,t:"10 real-world apps complete"}]},
+  {id:"portilla",nm:"Python for Data Science and Machine Learning Bootcamp",inst:"Jose Portilla, Pierian Training",pct:6,col:"#0a7a50",bg:"#d8f0e6",cat:"python",
+   ms:[{at:15,t:"Python basics + environment setup"},{at:30,t:"NumPy + Pandas + Matplotlib done"},{at:60,t:"ML section — sklearn, regression, classification"},{at:85,t:"NLP + neural net intro + recommenders"},{at:100,t:"Full data science toolkit complete"}]},
+  {id:"proj40",nm:"40 Real World Data Science, Machine Learning Projects 2025",inst:"Pianalytix • 75,000+ Students Worldwide",col:"#5a9a3a",bg:"#e8f2e0",pct:9,cat:"python",
+   ms:[{at:25,t:"10 projects — regression, classification, EDA"},{at:50,t:"20 projects — NLP, time series, clustering"},{at:75,t:"30 projects — DL + computer vision"},{at:100,t:"40 projects — massive portfolio signal"}]},
+  {id:"php_scratch",nm:"PHP From Scratch | Beginner To Advanced",inst:"Brad Traversy",pct:0,col:"#2563c7",bg:"#e4edfc",cat:"web",
+   ms:[{at:25,t:"PHP syntax, forms, includes"},{at:50,t:"OOP PHP, sessions, security basics"},{at:75,t:"APIs, Composer, modern patterns"},{at:100,t:"Advanced PHP — production-ready"}]},
+  {id:"php_mysql",nm:"Projects in PHP and MySQL",inst:"Eduonix Learning Solutions, Eduonix-Tech",pct:1,col:"#1d4ed8",bg:"#e4edfc",cat:"web",
+   ms:[{at:25,t:"DB design + CRUD projects"},{at:50,t:"Auth, admin panels, joins"},{at:75,t:"Full small apps end-to-end"},{at:100,t:"Portfolio PHP/MySQL projects"}]},
+  {id:"react_mega",nm:"React Mega Course: Build 50 Real World Projects in 50 Days",inst:"Sufa Digital • 16,000+ Enrollments Worldwide",pct:3,col:"#2563c7",bg:"#e4edfc",cat:"web",
+   ms:[{at:20,t:"Components, hooks, routing"},{at:40,t:"State, context, API data"},{at:70,t:"Patterns across 35+ projects"},{at:100,t:"50 projects — React job-ready"}]},
+  {id:"pytorch",nm:"PyTorch for Deep Learning Bootcamp",inst:"Andrei Neagoie, Daniel Bourke",pct:0,col:"#5c4dc4",bg:"#ebe8fa",cat:"dl",
+   ms:[{at:15,t:"Tensors, autograd, training loop"},{at:35,t:"Neural net classification"},{at:50,t:"CNNs + transfer learning"},{at:75,t:"Custom datasets + experiment tracking"},{at:100,t:"Model deployment — production ML"}]},
+  {id:"donner",nm:"AI Engineer Agentic Track: The Complete Agent & MCP Course",inst:"Ed Donner, Ligency",pct:18,col:"#6d5bd4",bg:"#ebe8fa",cat:"dl",
+   ms:[{at:17,t:"Frontier vs open-source LLMs + Career Digital Twin"},{at:35,t:"RAG fundamentals + embeddings"},{at:50,t:"Production RAG + LangChain"},{at:75,t:"QLoRA fine-tuning"},{at:100,t:"Multi-agent systems + MCP complete"}]},
+  {id:"agents",nm:"Intro to AI Agents and Agentic AI",inst:"365 Careers",pct:59,col:"#7c6ad4",bg:"#ebe8fa",cat:"dl",
+   ms:[{at:25,t:"Agent fundamentals — reasoning patterns"},{at:50,t:"Tool use + function calling"},{at:75,t:"Multi-agent orchestration"},{at:100,t:"Agentic AI foundations complete"}]},
+  {id:"aws_ml",nm:"AWS Certified Machine Learning Engineer - Associate MLA-C01",inst:"Nikolai Schuler",pct:2,col:"#c77a0a",bg:"#f7edd9",cat:"cloud",
+   ms:[{at:25,t:"SageMaker + data engineering on AWS"},{at:50,t:"Model training + tuning at scale"},{at:75,t:"MLOps — deployment, monitoring, CI/CD"},{at:100,t:"Exam-ready — AWS ML Engineer cert"}]},
+  {id:"bio_sid",nm:"Applied Bioinformatics: From Sequences to Protein Structures",inst:"Nayyer Siddique",pct:0,col:"#c43d6e",bg:"#fce8f0",cat:"bio",
+   ms:[{at:25,t:"DNA/RNA sequence analysis + FASTA formats"},{at:50,t:"Protein sequence analysis + alignment"},{at:75,t:"Protein structure prediction"},{at:100,t:"Full pipeline: sequences to structures"}]},
+  {id:"bio_mar",nm:"Introduction to programming for Bioinformatics with Python",inst:"Diego Mariano, Ph.D.",pct:6,col:"#b8325e",bg:"#fce8f0",cat:"bio",
+   ms:[{at:25,t:"Biopython — SeqIO, FASTA parsing"},{at:50,t:"NCBI Entrez API + sequence retrieval"},{at:75,t:"Sequence alignment + phylogenetics"},{at:100,t:"Bioinformatics Python toolkit complete"}]},
+];
+
+const rolesDef = [
+  {n:"Application Support Analyst",bl:true},
+  {n:"Junior Software Engineer",bl:true},
+  {n:"IT Systems Administrator",bl:true},
+  {n:"Cloud Support Associate",bl:true},
+  {n:"M.S. AI Engineering (enrolling Dec 2026)",bl:true},
+  {n:"PhD track — computational biology / LDE niche",bl:true},
+  {n:"Junior Python Developer",rq:c=>c.intro_python>=40||c.automate_boring>=30||c.mega>=30},
+  {n:"Automation / Scripting Specialist",rq:c=>c.automate_boring>=50||c.mega>=40},
+  {n:"PHP Developer",rq:c=>c.php_scratch>=40||c.php_mysql>=35},
+  {n:"Junior React Developer",rq:c=>c.react_mega>=35},
+  {n:"Frontend Developer (React)",rq:c=>c.react_mega>=50},
+  {n:"Full-Stack Developer (PHP + React)",rq:c=>(c.php_scratch>=40||c.php_mysql>=35)&&c.react_mega>=45},
+  {n:"AI Engineer (Entry)",rq:c=>c.donner>=17},
+  {n:"LLM Application Developer",rq:c=>c.donner>=17},
+  {n:".NET AI Developer",rq:c=>c.donner>=17},
+  {n:"Data Analyst",rq:c=>c.portilla>=30},
+  {n:"Python Developer",rq:c=>c.portilla>=30||c.mega>=50},
+  {n:"BI Analyst",rq:c=>c.portilla>=30},
+  {n:"ML Engineer (Jr)",rq:c=>c.portilla>=60},
+  {n:"Data Scientist (Entry)",rq:c=>c.portilla>=60},
+  {n:"Analytics Engineer",rq:c=>c.portilla>=60&&c.proj40>=25},
+  {n:"DL Engineer (Entry)",rq:c=>c.pytorch>=15},
+  {n:"Computer Vision Engineer",rq:c=>c.pytorch>=50},
+  {n:"Deep Learning Engineer",rq:c=>c.pytorch>=50&&c.portilla>=60},
+  {n:"RAG Engineer",rq:c=>c.donner>=50},
+  {n:"AI Solutions Architect",rq:c=>c.donner>=50&&c.pytorch>=50},
+  {n:"Agentic AI Developer",rq:c=>c.agents>=75&&c.donner>=50},
+  {n:"Senior AI Engineer",rq:c=>c.donner>=100&&c.pytorch>=50},
+  {n:"AI Architect",rq:c=>c.donner>=100&&c.pytorch>=100},
+  {n:"Head of AI (Startup)",rq:c=>c.donner>=100&&c.pytorch>=100&&c.agents>=100},
+  {n:"AWS ML Engineer",rq:c=>c.aws_ml>=100},
+  {n:"Cloud ML Platform Engineer",rq:c=>c.aws_ml>=75&&c.pytorch>=50},
+  {n:"ML Platform Engineer",rq:c=>c.pytorch>=100&&c.aws_ml>=50},
+  {n:"Bioinformatics Analyst",rq:c=>c.bio_sid>=25||c.bio_mar>=50},
+  {n:"Genomics Data Engineer",rq:c=>(c.bio_sid>=25||c.bio_mar>=50)&&c.portilla>=60},
+  {n:"Bioinformatics Engineer",rq:c=>(c.bio_sid>=50||c.bio_mar>=75)&&c.pytorch>=50},
+  {n:"LDE / protein-ML research prep (PhD portfolio)",rq:c=>c.bio_sid>=40&&c.pytorch>=30&&c.portilla>=45},
+  {n:"Computational biology grad researcher (MS→PhD bridge)",rq:c=>c.bio_sid>=55&&c.pytorch>=40&&c.portilla>=55},
+  {n:"Comp Bio Analyst",rq:c=>c.bio_sid>=75&&c.portilla>=100},
+  {n:"Research Engineer — Life Sci",rq:c=>c.bio_sid>=75&&c.pytorch>=100},
+  {n:"Computational Biologist",rq:c=>c.bio_sid>=100&&c.pytorch>=100&&c.portilla>=100},
+  {n:"PhD candidate profile — comp bio (LDE-aligned lab)",rq:c=>c.bio_sid>=70&&c.pytorch>=65&&c.portilla>=70},
+  {n:"Data Scientist",rq:c=>c.portilla>=100&&c.pytorch>=50},
+  {n:"Research Engineer (Industry)",rq:c=>c.pytorch>=100&&c.donner>=75},
+  {n:"Principal Research Scientist",rq:c=>c.bio_sid>=100&&c.pytorch>=100&&c.donner>=100&&c.portilla>=100},
+];
+
+const careerPathsDef = [
+  { n:"PhD: computational biology (LDE thesis) + MS AI bridge", combo:"Bioinformatics courses + PyTorch + Portilla/DS; M.S. AI Eng from Dec 2026; advisor hunt: latent models × directed evolution / protein design", sal:"Grad stipend ~$35K–$55K · post-PhD industry $150K–$230K+ (geo & team)",
+    unlocked:c=>(c.bio_sid>=25||c.bio_mar>=40)&&c.portilla>=30,
+    roles:"Triangle NC first (Duke/UNC/NCSU), then national hubs; thesis: LDE within comp bio / bioinformatics",
+    gap:c=>{ const a=[]; if(c.bio_sid<25&&c.bio_mar<40) a.push("Bioinformatics depth (Siddique or Mariano) toward PhD readiness"); if(c.portilla<30) a.push(`Portilla +${30-c.portilla}% to 30% for DS/ML signal`); if(c.pytorch<25) a.push("PyTorch 25%+ for latent/representation-learning story"); return a.slice(0,3); } },
+  { n:"Python → data & ML", combo:"Portilla DS/ML + Mega or Intro Python", sal:"$75K–$130K+",
+    unlocked:c=>c.portilla>=30&&(c.mega>=20||c.intro_python>=25),
+    roles:"Data Analyst, Python Developer, BI Analyst; at 60%+ ML / DS entry",
+    gap:c=>{ const a=[]; if(c.portilla<30) a.push(`Portilla +${30-c.portilla}% to 30%`); if(c.mega<20&&c.intro_python<25) a.push("Intro Python or Mega toward 20–25%"); return a; } },
+  { n:"Deep learning & PyTorch", combo:"PyTorch bootcamp + Portilla ML section", sal:"$95K–$160K+",
+    unlocked:c=>c.pytorch>=15&&c.portilla>=30,
+    roles:"DL Engineer (Entry); CV / DL engineer at higher completion",
+    gap:c=>{ const a=[]; if(c.pytorch<15) a.push(`PyTorch +${15-c.pytorch}% to 15%`); if(c.portilla<30) a.push(`Portilla +${30-c.portilla}% to 30%`); return a; } },
+  { n:"Agentic AI & LLM apps", combo:"Donner Agent/MCP + 365 Agents intro", sal:"$80K–$180K+",
+    unlocked:c=>c.donner>=17&&c.agents>=25,
+    roles:"AI Engineer (Entry), LLM dev; RAG / agentic roles at 50%+ Donner",
+    gap:c=>{ const a=[]; if(c.donner<17) a.push(`Donner +${17-c.donner}% to 17%`); if(c.agents<25) a.push(`Agents +${25-c.agents}% to 25%`); return a; } },
+  { n:"AWS ML on cloud", combo:"AWS MLA-C01 prep + ML/DL coursework", sal:"$110K–$175K+",
+    unlocked:c=>c.aws_ml>=50&&(c.portilla>=40||c.pytorch>=15),
+    roles:"Toward AWS ML Engineer cert; Cloud ML Platform Engineer at 75%+ with PyTorch",
+    gap:c=>{ const a=[]; if(c.aws_ml<50) a.push(`AWS ML +${50-c.aws_ml}% to 50%`); if(c.portilla<40&&c.pytorch<15) a.push("Portilla 40%+ or PyTorch 15%+"); return a; } },
+  { n:"Bioinformatics & comp bio (→ LDE / PhD)", combo:"Siddique sequences→structures + Mariano Python bioinfo + DL stack", sal:"$125K–$210K+ (industry); PhD stipend separate",
+    unlocked:c=>c.bio_sid>=25||c.bio_mar>=50,
+    roles:"Bioinformatics → LDE-oriented research prep; Genomics DE; PhD apps with Triangle + national lab map",
+    gap:c=>{ const a=[]; if(c.bio_sid<25) a.push(`Applied Bioinfo +${25-c.bio_sid}% to 25%`); if(c.bio_mar<50) a.push(`Mariano bioinfo +${50-c.bio_mar}% to 50%`); return a.slice(0,2); } },
+  { n:"Full-stack web (PHP + React)", combo:"Traversy PHP + React Mega + optional MySQL projects", sal:"$70K–$125K+",
+    unlocked:c=>(c.php_scratch>=35||c.php_mysql>=30)&&c.react_mega>=35,
+    roles:"PHP Developer, Junior React, Full-Stack (PHP + React)",
+    gap:c=>{ const a=[]; if(c.php_scratch<35&&c.php_mysql<30) a.push("PHP From Scratch or PHP/MySQL projects ~35%/30%"); if(c.react_mega<35) a.push(`React Mega +${35-c.react_mega}% to 35%`); return a; } },
+  { n:"Automation-first Python", combo:"Automate the Boring Stuff + Mega Course", sal:"$60K–$105K+",
+    unlocked:c=>c.automate_boring>=40&&c.mega>=25,
+    roles:"Automation specialist, scripting, ops-friendly developer",
+    gap:c=>{ const a=[]; if(c.automate_boring<40) a.push(`Automate… +${40-c.automate_boring}% to 40%`); if(c.mega<25) a.push(`Mega +${25-c.mega}% to 25%`); return a; } },
+  { n:"Portfolio-heavy ML (40 projects)", combo:"Pianalytix 40 projects + Portilla or PyTorch", sal:"$85K–$140K+",
+    unlocked:c=>c.proj40>=25&&(c.portilla>=45||c.pytorch>=15),
+    roles:"Analytics Engineer, strong signal for ML interviews",
+    gap:c=>{ const a=[]; if(c.proj40<25) a.push(`40 Projects +${25-c.proj40}% to 25%`); if(c.portilla<45&&c.pytorch<15) a.push("Portilla 45%+ or PyTorch 15%+"); return a; } },
+];
+
+function getCS() {
+  const cs = {};
+  courses.forEach(c => cs[c.id] = c.pct);
+  return cs;
+}
+
+function getSal(cs) {
+  let mn=58, mx=82;
+  if(cs.intro_python>=50||cs.automate_boring>=40){mn=Math.max(mn,65);mx=Math.max(mx,95)}
+  if(cs.react_mega>=35||(cs.php_scratch>=30||cs.php_mysql>=25)){mn=Math.max(mn,68);mx=Math.max(mx,105)}
+  if(cs.react_mega>=50&&(cs.php_scratch>=40||cs.php_mysql>=35)){mn=Math.max(mn,80);mx=Math.max(mx,120)}
+  if(cs.portilla>=30){mn=Math.max(mn,75);mx=Math.max(mx,100)}
+  if(cs.portilla>=60){mn=Math.max(mn,85);mx=Math.max(mx,120)}
+  if(cs.portilla>=100){mn=Math.max(mn,95);mx=Math.max(mx,130)}
+  if(cs.mega>=50){mx=Math.max(mx,110)}
+  if(cs.automate_boring>=70){mx=Math.max(mx,108)}
+  if(cs.pytorch>=15){mn=Math.max(mn,95);mx=Math.max(mx,130)}
+  if(cs.pytorch>=50){mn=Math.max(mn,110);mx=Math.max(mx,145)}
+  if(cs.pytorch>=100){mn=Math.max(mn,120);mx=Math.max(mx,160)}
+  if(cs.donner>=17){mn=Math.max(mn,80);mx=Math.max(mx,110)}
+  if(cs.donner>=50){mn=Math.max(mn,125);mx=Math.max(mx,160)}
+  if(cs.donner>=100){mn=Math.max(mn,140);mx=Math.max(mx,180)}
+  if(cs.agents>=75){mx=Math.max(mx,155)}
+  if(cs.aws_ml>=75){mx=Math.max(mx,165)}
+  if(cs.aws_ml>=100){mn=Math.max(mn,130);mx=Math.max(mx,175)}
+  if(cs.bio_sid>=25||cs.bio_mar>=50){mn=Math.max(mn,122);mx=Math.max(mx,168)}
+  if(cs.bio_sid>=50&&cs.pytorch>=35&&cs.portilla>=50){mn=Math.max(mn,128);mx=Math.max(mx,185)}
+  if(cs.bio_sid>=75){mn=Math.max(mn,132);mx=Math.max(mx,178)}
+  if(cs.bio_sid>=100&&cs.pytorch>=100){mn=Math.max(mn,158);mx=Math.max(mx,220)}
+  if(cs.proj40>=50){mx=Math.max(mx,125)}
+  return {mn,mx};
+}
+
+function getStage(cs) {
+  if(cs.pytorch>=100&&cs.donner>=100&&cs.portilla>=100) {
+    if(cs.bio_sid>=75) return {n:7,l:"LDE-aligned comp bio — PhD application strength",c:"var(--pink)"};
+    return {n:6,l:"Senior AI engineer tier · MS AI Eng Dec ’26",c:"var(--blue)"};
+  }
+  if(cs.pytorch>=50&&cs.donner>=50) return {n:5,l:"Mid-senior AI/ML + PhD bridge (MS AI ’26)",c:"var(--purple)"};
+  if((cs.php_scratch>=40||cs.php_mysql>=35)&&cs.react_mega>=45) return {n:4,l:"Full-stack web + AI stack",c:"var(--blue)"};
+  if(cs.bio_sid>=50&&cs.pytorch>=35) return {n:4,l:"Comp bio + DL — LDE thesis prep",c:"var(--pink)"};
+  if(cs.pytorch>=15||cs.portilla>=60) return {n:3,l:"ML + early DL competency",c:"var(--purple)"};
+  if(cs.portilla>=30) return {n:2,l:"Data analysis · MS AI Eng incoming",c:"var(--teal)"};
+  if(cs.donner>=17) return {n:1,l:"AI foundations · PhD comp bio goal",c:"var(--blue)"};
+  const tot = Object.values(cs).reduce((a,b)=>a+b,0);
+  if(tot>15) return {n:1,l:"Building stack · Kinston → Triangle PhD map",c:"var(--teal)"};
+  return {n:0,l:"Baseline · MS AI Dec ’26 · PhD comp bio (LDE)",c:"var(--text3)"};
+}
+
+function getActions(cs) {
+  const all = [
+    {p:11,rq:cs.bio_sid<40&&cs.portilla>=20, t:"PhD map: shortlist Research Triangle labs (Duke / UNC / NCSU) for LDE + latent models — reach out before MS AI starts Dec ’26"},
+    {p:10,rq:cs.portilla<30, t:`Push Portilla to 30% — data fluency for comp bio + MS AI (${Math.max(0,30-cs.portilla)}% to go)`},
+    {p:9,rq:cs.agents>=50&&cs.agents<75, t:`Push Agents to 75% — multi-agent orchestration (${75-cs.agents}% to go)`},
+    {p:8,rq:cs.pytorch<1&&cs.portilla>=6, t:"Start PyTorch — latent/representation-learning story for LDE thesis angle"},
+    {p:8,rq:cs.donner>=17&&cs.donner<35, t:`Push Donner to 35% — RAG fundamentals (${35-cs.donner}% to go)`},
+    {p:7,rq:cs.bio_mar>=1&&cs.bio_mar<25, t:`Push Mariano Bioinfo to 25% — Biopython + NCBI (${25-cs.bio_mar}% to go) for PhD narrative`},
+    {p:6,rq:cs.portilla>=30&&cs.portilla<60, t:`Push Portilla to 60% — ML depth for MS AI + comp bio (${60-cs.portilla}% to go)`},
+    {p:6,rq:cs.pytorch>=15&&cs.pytorch<50, t:`Push PyTorch to 50% — protein/seq models + DL engineer path (${50-cs.pytorch}% to go)`},
+    {p:5,rq:cs.donner>=35&&cs.donner<50, t:`Push Donner to 50% — production RAG (${50-cs.donner}% to go)`},
+    {p:5,rq:cs.bio_sid<25&&cs.bio_mar>=25, t:"Start Siddique Applied Bioinfo — sequences → structures (feeds LDE / protein design story)"},
+    {p:4,rq:cs.aws_ml<25&&cs.pytorch>=50, t:"AWS ML cert — cloud scale for future lab/industry hybrid"},
+    {p:3,rq:cs.pytorch>=100&&cs.donner>=100, t:"Core DL/AI done — pivot time to publications, PI outreach, and PhD applications (comp bio / LDE)"},
+    {p:7,rq:cs.agents>=75&&cs.agents<100, t:`Finish Agents course — ${100-cs.agents}% to go`},
+    {p:5,rq:cs.proj40>=9&&cs.proj40<25, t:`Push 40 Projects to 25% — 10 portfolio projects (${25-cs.proj40}% to go)`},
+    {p:4,rq:cs.mega>=2&&cs.mega<20, t:`Push Mega Course to 20% — core Python automation (${20-cs.mega}% to go)`},
+    {p:5,rq:cs.react_mega<35&&(cs.php_scratch>=15||cs.php_mysql>=1), t:`Push React Mega to 35% — Junior React path (${35-cs.react_mega}% to go)`},
+    {p:4,rq:cs.php_scratch<40&&cs.php_mysql<35&&cs.react_mega>=20, t:"Add PHP depth (From Scratch or MySQL projects) for full-stack"},
+    {p:3,rq:cs.intro_python<40&&cs.portilla<15, t:"Intro To Python or Automate… toward 40% — strengthens Python→data path"},
+  ];
+  return all.filter(a=>a.rq).sort((a,b)=>b.p-a.p).slice(0,4);
+}
+
+function save() {
+  const data = {};
+  courses.forEach(c => data[c.id] = c.pct);
+  data._ts = Date.now();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function load() {
+  try {
+    let raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      raw = localStorage.getItem("kel_threshold_v4");
+      if (!raw) return;
+    }
+    const data = JSON.parse(raw);
+    courses.forEach(c => {
+      if (typeof data[c.id] === "number") c.pct = data[c.id];
+    });
+  } catch(e) {}
+}
+
+function render() {
+  const cs = getCS();
+  const sal = getSal(cs);
+  const stage = getStage(cs);
+  const unlocked = rolesDef.filter(r => r.bl || (r.rq && r.rq(cs)));
+  const locked = rolesDef.filter(r => !r.bl && r.rq && !r.rq(cs));
+  const totalPct = Math.round(courses.reduce((a,c) => a + c.pct, 0) / courses.length);
+
+  document.getElementById("sal").textContent = `$${sal.mn}K–$${sal.mx}K`;
+  document.getElementById("sal").style.color = sal.mn > 80 ? "var(--teal)" : "var(--text)";
+  const baseSal = 58;
+  const delta = sal.mn - baseSal;
+  let salSub = delta > 0 ? `+$${delta}K vs MS/PhD-track baseline ($${baseSal}K)` : `Baseline ~$${baseSal}K floor (SWE + MS AI Dec ’26)`;
+  if ((cs.bio_sid>=25||cs.bio_mar>=50)&&sal.mx>=150) salSub += " · comp bio / post-PhD ceiling";
+  document.getElementById("sal-delta").textContent = salSub;
+
+  document.getElementById("role-count").textContent = unlocked.length;
+  document.getElementById("role-total").textContent = `of ${rolesDef.length} possible`;
+
+  document.getElementById("stage-num").textContent = stage.n;
+  document.getElementById("stage-label").textContent = stage.l;
+  document.getElementById("stage-num").style.color = stage.c;
+
+  document.getElementById("mb-fill").style.width = totalPct + "%";
+  document.getElementById("mb-pct").textContent = totalPct + "%";
+  const nCourses = courses.length;
+  document.getElementById("mb-course-count").textContent = `Across all ${nCourses} courses`;
+
+  const cpEl = document.getElementById("career-paths");
+  if (cpEl) {
+    cpEl.innerHTML = "";
+    const sorted = careerPathsDef.map(p => ({
+      p, on: p.unlocked(cs), gaps: p.gap(cs),
+    })).sort((a,b) => (b.on - a.on) || (a.gaps.length - b.gaps.length));
+
+    sorted.forEach(({ p, on, gaps }) => {
+      const row = document.createElement("div");
+      row.className = "cp-row" + (on ? " on" : (gaps.length <= 1 ? " near" : ""));
+      let gapHtml = "";
+      if (!on && gaps.length) {
+        gapHtml = `<div class="cp-gap">Next: ${gaps.join(" · ")}</div>`;
+      }
+      row.innerHTML = `
+        <div class="cp-h">${p.n} <span style="font-family:var(--mono);font-size:11px;color:var(--text3);font-weight:400;">${p.sal}</span></div>
+        <div class="cp-meta"><span class="mono">${p.combo}</span><br>${on ? "<strong>Unlocked</strong> — " : "In progress — "}${p.roles}</div>
+        ${gapHtml}
+      `;
+      cpEl.appendChild(row);
+    });
+  }
+
+  const sb = document.getElementById("stage-badge");
+  sb.querySelector(".stage-dot").style.background = stage.c;
+  sb.querySelector("span").textContent = `Stage ${stage.n}: ${stage.l}`;
+  sb.style.background = "var(--bg3)";
+  sb.style.color = "var(--text2)";
+
+  const rolesEl = document.getElementById("roles");
+  rolesEl.innerHTML = "";
+  unlocked.forEach(r => {
+    const t = document.createElement("span");
+    t.className = "rt " + (r.bl ? "base" : "new");
+    t.textContent = r.n;
+    rolesEl.appendChild(t);
+  });
+  locked.slice(0, 8).forEach(r => {
+    const t = document.createElement("span");
+    t.className = "rt locked";
+    t.textContent = r.n;
+    rolesEl.appendChild(t);
+  });
+
+  const acts = getActions(cs);
+  const al = document.getElementById("action-list");
+  al.innerHTML = "";
+  if (!acts.length) {
+    al.innerHTML = '<div class="act" style="color:var(--teal)">Strong position — tighten LDE narrative, publications/poster, and Triangle + national PhD shortlist</div>';
+  } else {
+    acts.forEach((a, i) => {
+      const d = document.createElement("div");
+      d.className = "act";
+      d.innerHTML = `<span class="act-num">${String(i+1).padStart(2,"0")}</span>${a.t}`;
+      al.appendChild(d);
+    });
+  }
+
+  courses.forEach(c => {
+    const pe = document.getElementById(`p-${c.id}`);
+    if (pe) { pe.textContent = c.pct + "%"; pe.style.color = c.col; }
+    const fl = document.getElementById(`f-${c.id}`);
+    if (fl) fl.style.width = c.pct + "%";
+
+    c.ms.forEach((m, i) => {
+      const el = document.getElementById(`m-${c.id}-${i}`);
+      if (!el) return;
+      if (c.pct >= m.at) {
+        el.className = "ms done";
+        el.innerHTML = `<span class="pct-tag">${m.at}%</span> ${m.t}`;
+      } else {
+        const prev = i > 0 ? c.ms[i-1].at : 0;
+        const isNext = c.pct >= prev && c.pct < m.at;
+        if (isNext) {
+          el.className = "ms next";
+          el.innerHTML = `<span class="pct-tag">${m.at}%</span> ${m.t} <span class="gap">(${m.at - c.pct}% to go)</span>`;
+        } else {
+          el.className = "ms";
+        }
+      }
+    });
+  });
+
+  save();
+}
+
+load();
+
+const blEl = document.getElementById("baseline");
+baselineSkills.forEach(s => {
+  const p = document.createElement("span");
+  p.className = "bp";
+  p.textContent = s;
+  blEl.appendChild(p);
+});
+
+const cats = [
+  {l:"Python fundamentals & automation", ids:["intro_python","automate_boring","mega"]},
+  {l:"Data science & machine learning", ids:["portilla","proj40"]},
+  {l:"Web development", ids:["php_scratch","php_mysql","react_mega"]},
+  {l:"Deep learning & AI engineering", ids:["pytorch","donner","agents"]},
+  {l:"Cloud certifications", ids:["aws_ml"]},
+  {l:"Bioinformatics", ids:["bio_sid","bio_mar"]},
+];
+
+const crsEl = document.getElementById("courses");
+cats.forEach(cat => {
+  const lb = document.createElement("div");
+  lb.className = "sec";
+  lb.textContent = cat.l;
+  lb.style.marginTop = "1rem";
+  crsEl.appendChild(lb);
+
+  cat.ids.forEach(id => {
+    const c = courses.find(x => x.id === id);
+    if (!c) return;
+    const card = document.createElement("div");
+    card.className = "cc";
+
+    let msHtml = "";
+    c.ms.forEach((m, i) => {
+      msHtml += `<div class="ms" id="m-${c.id}-${i}"><span class="pct-tag">${m.at}%</span> ${m.t}</div>`;
+    });
+
+    card.innerHTML = `
+      <div class="cc-top">
+        <div class="cc-name">${c.nm}</div>
+        <div class="cc-pct" id="p-${c.id}" style="color:${c.col}">${c.pct}%</div>
+      </div>
+      <div class="cc-inst">${c.inst}</div>
+      <input type="range" min="0" max="100" value="${c.pct}" step="1" id="s-${c.id}" style="accent-color:${c.col}">
+      <div class="bar-wrap">
+        <div class="bar-track"><div class="bar-fill" id="f-${c.id}" style="background:${c.col};width:${c.pct}%"></div></div>
+      </div>
+      ${msHtml}
+    `;
+    crsEl.appendChild(card);
+
+    const slider = card.querySelector(`#s-${c.id}`);
+    slider.addEventListener("input", e => {
+      c.pct = parseInt(e.target.value);
+      render();
+    });
+  });
+});
+
+document.getElementById("reset-btn").addEventListener("click", () => {
+  if (confirm("Reset all course progress to initial values?")) {
+    const dflt = {intro_python:0,automate_boring:2,mega:2,portilla:6,proj40:9,php_scratch:0,php_mysql:1,react_mega:3,pytorch:0,donner:18,agents:59,aws_ml:2,bio_sid:0,bio_mar:6};
+    courses.forEach(c => {
+      c.pct = dflt[c.id] ?? 0;
+      const sl = document.getElementById(`s-${c.id}`);
+      if (sl) sl.value = c.pct;
+    });
+    render();
+  }
+});
+
+render();
+</script>
+</body>
+</html>

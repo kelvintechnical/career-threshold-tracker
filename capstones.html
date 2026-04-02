@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Udemy capstones — Career toolkit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="site-brand-link">Kel — Toolkit</a>
+  <a href="career_threshold_tracker.html">Tracker</a>
+  <a href="curriculum.html">160 projects</a>
+  <a href="capstones.html" class="nav-hi">Udemy capstones</a>
+</nav>
+
+<div class="sub-hero">
+  <h1>Udemy capstones &amp; course mentor prompts</h1>
+  <p>Below: <strong>one LLM prompt per course</strong> (expand → copy). Then the course table and ten multi-course builds. For task-level prompts, use the <a href="curriculum.html" class="text-link">160 tier projects</a>.</p>
+</div>
+
+<div class="proj-panel" id="udemy-prompts" style="margin-top:0">
+  <div class="proj-title">Course-level LLM prompts (14 Udemy courses)</div>
+  <p class="proj-intro">Paste into ChatGPT, Claude, Gemini, or Copilot. Each prompt asks for a 4-week sprint, spaced repetition, and links to Python / PyTorch / agents when the syllabus allows.</p>
+  <div id="course-prompts-mount"></div>
+</div>
+
+<div class="proj-panel">
+  <div class="proj-title">What each course teaches (technology lens)</div>
+  <div class="ct-wrap">
+    <table class="ct" aria-label="Courses and technologies">
+      <thead>
+        <tr><th>Course</th><th>Instructor</th><th>Technologies / concepts</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Introduction To Python Programming</td>
+          <td><span class="ins">Avinash Jain, The Codex</span></td>
+          <td class="tech">Python syntax, control flow, functions, beginner patterns, small programs</td>
+        </tr>
+        <tr>
+          <td>Automate the Boring Stuff with Python Programming</td>
+          <td><span class="ins">Al Sweigart</span></td>
+          <td class="tech"><code style="font-family:var(--mono);font-size:10px">pathlib</code>, regex, CSV/Excel/PDF, scheduling, practical scripting</td>
+        </tr>
+        <tr>
+          <td>The Python Mega Course: Build 10 Real World Applications</td>
+          <td><span class="ins">Ardit Sulce • 600,000+ Students Worldwide</span></td>
+          <td class="tech">Broader Python, GUIs, Flask-style web, databases, APIs, automation breadth</td>
+        </tr>
+        <tr>
+          <td>Python for Data Science and Machine Learning Bootcamp</td>
+          <td><span class="ins">Jose Portilla, Pierian Training</span></td>
+          <td class="tech">NumPy, Pandas, Matplotlib, scikit-learn, ML workflows, intro neural nets</td>
+        </tr>
+        <tr>
+          <td>40 Real World Data Science, Machine Learning Projects 2025</td>
+          <td><span class="ins">Pianalytix • 75,000+ Students Worldwide</span></td>
+          <td class="tech">Many end-to-end ML project shapes — tabular, NLP, CV — portfolio repetition</td>
+        </tr>
+        <tr>
+          <td>PHP From Scratch | Beginner To Advanced</td>
+          <td><span class="ins">Brad Traversy</span></td>
+          <td class="tech">PHP core, forms, OOP PHP, sessions, patterns toward maintainable PHP</td>
+        </tr>
+        <tr>
+          <td>Projects in PHP and MySQL</td>
+          <td><span class="ins">Eduonix Learning Solutions, Eduonix-Tech</span></td>
+          <td class="tech">MySQL schema, CRUD, auth-style patterns, multi-page PHP apps</td>
+        </tr>
+        <tr>
+          <td>React Mega Course: Build 50 Real World Projects in 50 Days</td>
+          <td><span class="ins">Sufa Digital • 16,000+ Enrollments Worldwide</span></td>
+          <td class="tech">React, hooks, routing, state, consuming APIs, many focused UIs</td>
+        </tr>
+        <tr>
+          <td>PyTorch for Deep Learning Bootcamp</td>
+          <td><span class="ins">Andrei Neagoie, Daniel Bourke</span></td>
+          <td class="tech">PyTorch tensors, training loops, CNNs, transfer learning, deployment themes</td>
+        </tr>
+        <tr>
+          <td>AI Engineer Agentic Track: The Complete Agent &amp; MCP Course</td>
+          <td><span class="ins">Ed Donner, Ligency</span></td>
+          <td class="tech">LLMs, RAG, LangChain-style stacks, agents, MCP, production-leaning AI apps</td>
+        </tr>
+        <tr>
+          <td>Intro to AI Agents and Agentic AI</td>
+          <td><span class="ins">365 Careers</span></td>
+          <td class="tech">Agent patterns, tools / function calling, orchestration concepts</td>
+        </tr>
+        <tr>
+          <td>AWS Certified Machine Learning Engineer - Associate MLA-C01</td>
+          <td><span class="ins">Nikolai Schuler</span></td>
+          <td class="tech">SageMaker, S3, IAM-shaped training &amp; inference, MLOps-oriented AWS for the cert</td>
+        </tr>
+        <tr>
+          <td>Applied Bioinformatics: From Sequences to Protein Structures</td>
+          <td><span class="ins">Nayyer Siddique</span></td>
+          <td class="tech">Sequence → structure ideas, bio formats, protein structure context</td>
+        </tr>
+        <tr>
+          <td>Introduction to programming for Bioinformatics with Python</td>
+          <td><span class="ins">Diego Mariano, Ph.D.</span></td>
+          <td class="tech">Biopython workflows, NCBI / APIs, alignments, scripting for bio data</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="combo-cap-h">Ten portfolio projects (named course combinations)</div>
+
+  <div class="combo-card">
+    <div class="combo-num">01</div>
+    <div class="combo-title">Document intake portal</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> PHP, MySQL, file uploads, Python batch (parsing / features), Pandas + scikit-learn classifier or scoring.<br>
+      <strong>Deliverable:</strong> Upload docs → rows in MySQL → Python enriches with category/score → PHP dashboard lists results.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>Projects in PHP and MySQL</strong> (Eduonix) · <strong>Automate the Boring Stuff</strong> (Sweigart) · <strong>Python for Data Science and Machine Learning Bootcamp</strong> (Portilla)</div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">02</div>
+    <div class="combo-title">Smart ticket / intake UI + Python API</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> React, Flask or FastAPI, JSON, Pandas + sklearn, simple explainability (e.g. top features).<br>
+      <strong>Deliverable:</strong> React form → <code style="font-family:var(--mono);font-size:10px;color:var(--text3)">/predict</code> → show label, confidence, short explanation string.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>React Mega Course</strong> (Sufa Digital) · <strong>The Python Mega Course</strong> (Sulce) · <strong>Portilla</strong> data science bootcamp</div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">03</div>
+    <div class="combo-title">Full stack: PHP auth + React UI + Python inference</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> PHP sessions/auth, MySQL, React SPA, REST between tiers, Python only for model.<br>
+      <strong>Deliverable:</strong> PHP owns login + metadata; React is product face; Python service is isolated inference — clean interview boundary.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>PHP From Scratch</strong> (Traversy) · <strong>Projects in PHP and MySQL</strong> (Eduonix) · <strong>React Mega Course</strong> (Sufa) · <strong>Python Mega Course</strong> (Sulce)</div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">04</div>
+    <div class="combo-title">Custom dataset deep learning + portfolio write-up</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> PyTorch training loop, CNN or strong tabular model, metrics/plots, README in “40 projects” style.<br>
+      <strong>Deliverable:</strong> One custom dataset end-to-end: EDA → train → evaluate → saved weights + figures.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>PyTorch for Deep Learning Bootcamp</strong> (Neagoie / Bourke) · <strong>Portilla</strong> · <strong>40 Real World Data Science, Machine Learning Projects 2025</strong> (Pianalytix)</div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">05</div>
+    <div class="combo-title">Automation-first ML artifact pipeline (AWS)</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> Scheduled Python, training script outputs artifacts, S3, optional batch or metrics file, notifications.<br>
+      <strong>Deliverable:</strong> Nightly: new CSV from watched folder → refresh model or batch scores → push metrics to S3 (+ optional email).
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>Automate the Boring Stuff</strong> (Sweigart) · <strong>Portilla</strong> · <strong>AWS MLA-C01</strong> (Schuler)</div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">06</div>
+    <div class="combo-title">RAG over your document folder</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> Chunking/cleaning (Sweigart), embeddings + vector store + tool use from agent courses, optional React chat UI.<br>
+      <strong>Deliverable:</strong> Local PDF/Markdown folder → indexed → query with citations (CLI first is fine).
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>Intro to AI Agents and Agentic AI</strong> (365 Careers) · <strong>Agentic Track / MCP</strong> (Donner, Ligency) · <strong>Automate the Boring Stuff</strong> · optional <strong>React Mega Course</strong></div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">07</div>
+    <div class="combo-title">Bio pipeline CLI → scoring model</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> Biopython / Entrez / parsing (Mariano), biology context (Siddique), features → sklearn or PyTorch head, plots.<br>
+      <strong>Deliverable:</strong> FASTA or accession in → fetch/parse → features → prediction + simple report figure.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>Introduction to programming for Bioinformatics with Python</strong> (Mariano) · <strong>Applied Bioinformatics</strong> (Siddique) · <strong>Portilla</strong> or <strong>PyTorch</strong> bootcamp</div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">08</div>
+    <div class="combo-title">Same model, AWS-hosted inference</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> S3 artifacts, SageMaker training or hosting, IAM, thin React or PHP client.<br>
+      <strong>Deliverable:</strong> Take project <strong>04</strong> (or similar) and deploy inference the AWS ML course way.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>AWS MLA-C01</strong> (Schuler) · <strong>PyTorch for Deep Learning Bootcamp</strong> · <strong>React Mega Course</strong> or <strong>PHP / MySQL projects</strong></div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">09</div>
+    <div class="combo-title">Mega Course app + one ML feature</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> App structure from Mega Course, beginner clarity from Intro Python, one Portilla-style model (recommendation, forecast, classifier).<br>
+      <strong>Deliverable:</strong> Extend one “10 apps” style project with a single shipped ML feature + tests.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>The Python Mega Course</strong> (Sulce) · <strong>Introduction To Python Programming</strong> (Jain) · <strong>Portilla</strong></div>
+  </div>
+
+  <div class="combo-card">
+    <div class="combo-num">10</div>
+    <div class="combo-title">Portfolio site that tells the stack story</div>
+    <div class="combo-lines">
+      <strong>Technologies:</strong> React case-study pages, optional PHP for blog routing, three repo deep-links with stack diagrams.<br>
+      <strong>Deliverable:</strong> Public site linking GitHub; each case study maps <strong>courses → tech → outcome</strong>.
+    </div>
+    <div class="combo-course"><em>Combine:</em> <strong>React Mega Course</strong> · <strong>PHP From Scratch</strong> (optional static/server routing) · narratives shaped like <strong>40 Projects</strong> (Pianalytix)</div>
+  </div>
+
+  <p class="proj-intro" style="margin-top:0.75rem;margin-bottom:0;font-size:11px;color:var(--text3)">
+    <strong>Suggested focus:</strong> ship <strong>#2</strong> then <strong>#3</strong> for web + ML; add <strong>#6</strong> for AI engineer narrative; use <strong>#7</strong> + <strong>#8</strong> for research + cloud.
+  </p>
+</div>
+
+<p class="save-note"><a href="curriculum.html" class="text-link">← 160 tier projects + LLM prompts</a></p>
+<script src="course_prompts.js"></script>
+<script>
+  renderCoursePrompts("course-prompts-mount");
+</script>
+</body>
+</html>
