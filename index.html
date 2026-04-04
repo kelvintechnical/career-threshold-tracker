@@ -1,46 +1,691 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kel — Career toolkit</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelvin R. Tobias — Career Dashboard</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<nav class="site-nav">
-  <a href="index.html" class="site-brand-link">Kel — Toolkit</a>
-  <a href="career_threshold_tracker.html">Tracker</a>
-  <a href="curriculum.html" class="nav-hi">100 projects</a>
-  <a href="capstones.html">Udemy capstones</a>
-</nav>
-<div class="sub-hero">
-  <h1>Career toolkit</h1>
-  <p>Static pages + JSON data files. Keep everything in this folder when you move or zip it.</p>
-</div>
-<div class="tier-grid">
-  <a class="tier-link-card" href="career_threshold_tracker.html">
-    <span class="tn">◎</span>
-    <div>
-      <div class="tt">Course &amp; salary tracker</div>
-      <div class="td">Sliders, roles, career paths, browser save</div>
+  <div class="app">
+    <header class="zone-header">
+      <div class="zone-header__left">
+        <h1>Kelvin R. Tobias</h1>
+        <p class="zone-header__subtitle">AI Engineering Track · Diesel-to-Digital-to-DNA</p>
+      </div>
+      <div class="zone-header__right">
+        <button type="button" class="export-skills-btn" id="export-skills-btn" aria-label="Copy unlocked resume skills to clipboard as a bullet list">
+          Export resume skills
+        </button>
+        <p class="zone-header__updated">Last updated: July 5, 2025</p>
+      </div>
+    </header>
+
+    <section class="metrics-row" aria-label="Summary metrics">
+      <article class="metric-card">
+        <p class="metric-card__label">Salary floor</p>
+        <p class="metric-card__value" id="metric-floor">$78K</p>
+        <p class="metric-card__sub">Current range</p>
+      </article>
+      <article class="metric-card">
+        <p class="metric-card__label">Salary ceiling</p>
+        <p class="metric-card__value" id="metric-ceil">$115K</p>
+        <p class="metric-card__sub">At current skills</p>
+      </article>
+      <article class="metric-card">
+        <p class="metric-card__label">Overall progress</p>
+        <p class="metric-card__value" id="metric-avg">5%</p>
+        <p class="metric-card__sub">Across all courses</p>
+      </article>
+      <article class="metric-card">
+        <p class="metric-card__label">Skills unlocked</p>
+        <p class="metric-card__value" id="metric-skills">8</p>
+        <p class="metric-card__sub">Resume-ready</p>
+      </article>
+    </section>
+
+    <div class="main-grid">
+      <section class="panel" aria-labelledby="courses-heading">
+        <h2 class="panel__title" id="courses-heading">Course progress tracker</h2>
+        <div class="course-list" id="course-list"></div>
+      </section>
+
+      <aside>
+        <section class="panel" aria-labelledby="salary-heading">
+          <h2 class="panel__title" id="salary-heading">Salary &amp; roles</h2>
+          <p class="salary-title" id="current-title">App Support Analyst · AI/ML Student</p>
+          <p class="salary-range" id="salary-range">$78K – $115K</p>
+          <p class="next-unlock" id="next-unlock"></p>
+          <div class="panel-divider" role="presentation"></div>
+          <p class="roles-label">Roles you qualify for</p>
+          <div class="chip-grid" id="role-chips"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="skills-heading">
+          <h2 class="panel__title" id="skills-heading">Resume skills</h2>
+          <div class="chip-grid" id="skill-chips"></div>
+        </section>
+      </aside>
     </div>
-  </a>
-  <a class="tier-link-card" href="curriculum.html">
-    <span class="tn">100</span>
-    <div>
-      <div class="tt">Engineering Journal + AI prompts</div>
-      <div class="td">5 flagship stacks, 100 compounding projects, prompt modal on every card</div>
+
+    <section class="zone-built" aria-labelledby="built-heading">
+      <h2 class="zone-built__title" id="built-heading">What I've built</h2>
+      <div class="project-grid">
+        <a class="project-card" href="https://github.com/kelvintechnical/dog-breed-prediction" target="_blank" rel="noopener noreferrer">
+          <h3 class="project-card__name">Dog Breed CNN</h3>
+          <p class="project-card__tech">Python, TensorFlow, Streamlit</p>
+          <span class="project-card__link">github.com/kelvintechnical/dog-breed-prediction</span>
+        </a>
+        <a class="project-card" href="https://github.com/kelvintechnical/DNA_Tensor_Lab" target="_blank" rel="noopener noreferrer">
+          <h3 class="project-card__name">Bioinformatics Sequence Toolkit</h3>
+          <p class="project-card__tech">Python, Biopython</p>
+          <span class="project-card__link">github.com/kelvintechnical/DNA_Tensor_Lab</span>
+        </a>
+        <a class="project-card" href="https://github.com/kelvintechnical" target="_blank" rel="noopener noreferrer">
+          <h3 class="project-card__name">D424 Capstone (SPT Full-Stack)</h3>
+          <p class="project-card__tech">C#, Blazor, SQL Server</p>
+          <span class="project-card__link">github.com/kelvintechnical</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="zone-roadmap" aria-labelledby="roadmap-heading">
+      <h2 class="zone-roadmap__title" id="roadmap-heading">Portfolio Roadmap</h2>
+      <p class="zone-roadmap__subtitle">160 projects across 8 tiers — track what you've started</p>
+      <div class="roadmap-grid" id="roadmap-grid"></div>
+    </section>
+
+    <section class="zone-project-board" aria-labelledby="project-board-heading">
+      <h2 class="zone-project-board__title" id="project-board-heading">Project Status Board</h2>
+      <div id="project-board-mount" class="project-board-mount">
+        <div id="projects-summary" class="pj-summary"></div>
+        <nav id="stack-nav" class="stack-nav pj-stack-nav" aria-label="Jump to stack"></nav>
+        <div id="stacks-mount"></div>
+        <aside id="next-projects" class="next-projects" aria-label="Up next"></aside>
+      </div>
+    </section>
+  </div>
+
+  <div id="learn-modal" class="learn-modal" aria-hidden="true">
+    <div class="learn-modal__inner">
+      <div class="learn-modal__backdrop" data-close tabindex="-1"></div>
+      <div class="learn-modal__panel" role="dialog" aria-modal="true" aria-labelledby="learn-modal-title">
+        <div class="learn-modal__head">
+          <h3 class="learn-modal__title" id="learn-modal-title" data-modal-title>Prompt</h3>
+          <button type="button" class="learn-modal__close" data-close aria-label="Close">×</button>
+        </div>
+        <textarea class="learn-modal__text" data-modal-text readonly rows="14"></textarea>
+        <div class="learn-modal__actions">
+          <button type="button" class="learn-modal__btn" data-copy>Copy to Clipboard</button>
+          <a class="learn-modal__claude" data-claude href="#" target="_blank" rel="noopener noreferrer">Open in Claude</a>
+        </div>
+      </div>
     </div>
-  </a>
-  <a class="tier-link-card" href="capstones.html">
-    <span class="tn">10</span>
-    <div>
-      <div class="tt">Udemy capstones + course prompts</div>
-      <div class="td">Per-course LLM mentor text, course table, ten combo builds</div>
-    </div>
-  </a>
-</div>
+  </div>
+
+  <script src="course_prompts.js"></script>
+  <script src="compound_curriculum.js"></script>
+  <script>
+(function () {
+  "use strict";
+
+  var BASE_FLOOR = 78000;
+  var BASE_CEIL = 115000;
+
+  /** Salary thresholds: keys MUST match UDEMY_COURSES ids (donner, proj40, portilla, bio_sid, bio_mar — not agentic/ds_ml/…). */
+  var COURSE_LOGIC_BY_ID = {
+    pytorch: {
+      shortHint: "PyTorch",
+      start: 8,
+      thresholds: [[10, 5000], [25, 8000], [50, 14000], [75, 18000], [100, 25000]],
+      skills: [
+        { pct: 10, list: ["Tensor operations", "PyTorch basics"] },
+        { pct: 25, list: ["Neural network design", "Loss functions"] },
+        { pct: 50, list: ["CNNs / RNNs", "Transfer learning"] },
+        { pct: 75, list: ["Custom training loops", "Model evaluation"] },
+        { pct: 100, list: ["PyTorch production", "Deep learning"] }
+      ]
+    },
+    donner: {
+      shortHint: "Agentic/MCP",
+      start: 3,
+      thresholds: [[15, 6000], [40, 12000], [75, 20000], [100, 28000]],
+      skills: [
+        { pct: 15, list: ["LLM API integration", "Prompt engineering"] },
+        { pct: 40, list: ["AI agent design", "Tool calling"] },
+        { pct: 75, list: ["MCP architecture", "Agentic pipelines"] },
+        { pct: 100, list: ["Multi-agent systems", "Production AI agents"] }
+      ]
+    },
+    aws_ml: {
+      shortHint: "AWS MLA",
+      start: 1,
+      thresholds: [[30, 7000], [70, 14000], [100, 22000]],
+      skills: [
+        { pct: 30, list: ["SageMaker basics", "AWS ML services"] },
+        { pct: 70, list: ["MLOps on AWS", "Model deployment"] },
+        { pct: 100, list: ["AWS ML Engineer", "Cloud ML pipelines"] }
+      ]
+    },
+    proj40: {
+      shortHint: "DS & ML Projects",
+      start: 18,
+      thresholds: [[20, 4000], [50, 9000], [80, 15000], [100, 18000]],
+      skills: [
+        { pct: 20, list: ["Pandas / NumPy", "EDA pipelines"] },
+        { pct: 50, list: ["Feature engineering", "Sklearn pipelines"] },
+        { pct: 80, list: ["End-to-end ML projects", "Model deployment"] },
+        { pct: 100, list: ["Production ML portfolio"] }
+      ]
+    },
+    portilla: {
+      shortHint: "Python DS",
+      start: 0,
+      thresholds: [[25, 3000], [60, 7000], [100, 11000]],
+      skills: [
+        { pct: 25, list: ["Python data stack", "Matplotlib / Seaborn"] },
+        { pct: 60, list: ["Statistical analysis", "Data wrangling"] },
+        { pct: 100, list: ["Python DS fluency"] }
+      ]
+    },
+    bio_sid: {
+      shortHint: "Applied Bio",
+      start: 0,
+      thresholds: [[25, 5000], [60, 11000], [100, 17000]],
+      skills: [
+        { pct: 25, list: ["Biopython", "Sequence parsing"] },
+        { pct: 60, list: ["Protein structure analysis", "BLAST / MSA"] },
+        { pct: 100, list: ["Computational biology pipeline"] }
+      ]
+    },
+    bio_mar: {
+      shortHint: "Intro Bio",
+      start: 6,
+      thresholds: [[20, 3000], [50, 7000], [100, 12000]],
+      skills: [
+        { pct: 20, list: ["DNA / RNA parsing", "GC content analysis"] },
+        { pct: 50, list: ["Sequence alignment", "FASTA processing"] },
+        { pct: 100, list: ["Bioinformatics scripting"] }
+      ]
+    }
+  };
+
+  function logicForCourseId(id) {
+    var logic = COURSE_LOGIC_BY_ID[id];
+    if (logic) return logic;
+    return { shortHint: id, start: 0, thresholds: [], skills: [] };
+  }
+
+  const SLIDER_COURSES = UDEMY_COURSES.map(function (c) {
+    return {
+      id: c.id,
+      name: c.title,
+      pct: parseInt(localStorage.getItem("course-pct-" + c.id) || "0", 10)
+    };
+  });
+
+  var COURSES = UDEMY_COURSES.map(function (c) {
+    var logic = logicForCourseId(c.id);
+    return {
+      id: c.id,
+      name: c.title,
+      shortHint: logic.shortHint,
+      start: logic.start,
+      thresholds: logic.thresholds,
+      skills: logic.skills
+    };
+  });
+
+  var BASE_SKILLS = [
+    "Python",
+    "C# / .NET",
+    "SQL",
+    "AWS CCP",
+    "Linux+",
+    "Security+",
+    "ITIL 4",
+    "B.S. Software Engineering"
+  ];
+
+  var ROLES = [
+    { name: "App Support Analyst", floorMin: 0 },
+    { name: "Jr. Data Analyst", floorMin: 75000 },
+    { name: "AI/ML Support Engineer", floorMin: 80000 },
+    { name: "Healthcare Data Analyst", floorMin: 82000 },
+    { name: "ML Engineer I", floorMin: 95000 },
+    { name: "Bioinformatics Analyst", floorMin: 100000 },
+    { name: "AI/ML Engineer", floorMin: 105000 },
+    { name: "Computational Biologist", floorMin: 120000 },
+    { name: "Sr. ML Engineer", floorMin: 125000 },
+    { name: "AI Research Engineer", floorMin: 135000 }
+  ];
+
+  function formatSalaryK(amount) {
+    var k = Math.round(amount / 1000);
+    return "$" + k + "K";
+  }
+
+  function sumUnlockedBoosts(values) {
+    var total = 0;
+    COURSES.forEach(function (c) {
+      var pct = values[c.id];
+      c.thresholds.forEach(function (t) {
+        if (pct >= t[0]) total += t[1];
+      });
+    });
+    return total;
+  }
+
+  function computeFloor(values) {
+    return BASE_FLOOR + sumUnlockedBoosts(values);
+  }
+
+  function computeCeil(values) {
+    var boost = sumUnlockedBoosts(values);
+    return BASE_CEIL + Math.round(boost * 1.45);
+  }
+
+  function titleForFloor(floor) {
+    if (floor < 85000) return "App Support Analyst · AI/ML Student";
+    if (floor < 100000) return "AI/ML Support Engineer · AI Engineering Track";
+    if (floor < 115000) return "ML Engineer I · AI Engineering Track";
+    if (floor < 130000) return "AI/ML Engineer · Computational Biology Track";
+    return "AI Research Engineer · Computational Biology Track";
+  }
+
+  function collectUnlockedSkills(values) {
+    var set = {};
+    COURSES.forEach(function (c) {
+      var pct = values[c.id];
+      c.skills.forEach(function (s) {
+        if (pct >= s.pct) {
+          s.list.forEach(function (skill) {
+            set[skill] = true;
+          });
+        }
+      });
+    });
+    return Object.keys(set).sort();
+  }
+
+  function nextUnlockHint(values) {
+    var best = null;
+    COURSES.forEach(function (c) {
+      var pct = values[c.id];
+      c.thresholds.forEach(function (t) {
+        var need = t[0];
+        var boost = t[1];
+        if (pct < need) {
+          var delta = need - pct;
+          if (!best || delta < best.delta || (delta === best.delta && boost < best.boost)) {
+            best = { short: c.shortHint, delta: delta, boost: boost };
+          }
+        }
+      });
+    });
+    if (!best) return "All course salary thresholds unlocked — keep leveling up.";
+    var k = Math.round(best.boost / 1000);
+    return best.short + " +" + best.delta + "% → unlock +$" + k + "K";
+  }
+
+  function averageProgress(values) {
+    var sum = 0;
+    COURSES.forEach(function (c) {
+      sum += values[c.id];
+    });
+    return Math.round(sum / COURSES.length);
+  }
+
+  function unlockedSkillsForExport(vals) {
+    return BASE_SKILLS.concat(collectUnlockedSkills(vals));
+  }
+
+  function resumeSkillsBulletText(vals) {
+    return unlockedSkillsForExport(vals)
+      .map(function (s) {
+        return "• " + s;
+      })
+      .join("\n");
+  }
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  var COURSE_LS_PREFIX = "course-pct-";
+
+  var LEGACY_STORAGE_KEYS = {
+    pytorch: [],
+    donner: ["agentic"],
+    aws_ml: ["aws"],
+    proj40: ["ds_ml", "ds"],
+    portilla: ["python_ds", "pythonds"],
+    bio_sid: ["bio_seq", "appliedbio"],
+    bio_mar: ["bio_python", "introbio"]
+  };
+
+  function courseStorageKey(courseId) {
+    return COURSE_LS_PREFIX + courseId;
+  }
+
+  function loadStoredPercent(courseId, fallback) {
+    try {
+      var candidates = [courseStorageKey(courseId), courseId];
+      var legacy = LEGACY_STORAGE_KEYS[courseId];
+      if (legacy) {
+        legacy.forEach(function (oldId) {
+          candidates.push(courseStorageKey(oldId));
+          candidates.push(oldId);
+        });
+      }
+      var i;
+      for (i = 0; i < candidates.length; i++) {
+        var raw = localStorage.getItem(candidates[i]);
+        if (raw === null || raw === "") continue;
+        var n = parseInt(raw, 10);
+        if (!isFinite(n)) continue;
+        n = Math.max(0, Math.min(100, n));
+        return n;
+      }
+      return fallback;
+    } catch (err) {
+      return fallback;
+    }
+  }
+
+  function saveStoredPercent(courseId, n) {
+    try {
+      var clamped = Math.max(0, Math.min(100, Math.round(Number(n))));
+      localStorage.setItem(courseStorageKey(courseId), String(clamped));
+    } catch (err) {
+      /* private mode / quota */
+    }
+  }
+
+  var values = {};
+  SLIDER_COURSES.forEach(function (row) {
+    var logic = COURSE_LOGIC_BY_ID[row.id];
+    var pct = row.pct;
+    if (!isFinite(pct)) pct = 0;
+    if (logic && logic.thresholds.length) {
+      var stored = localStorage.getItem("course-pct-" + row.id);
+      if (stored === null || stored === "") {
+        pct = loadStoredPercent(row.id, logic.start);
+      } else {
+        pct = Math.max(0, Math.min(100, pct));
+      }
+    } else {
+      pct = Math.max(0, Math.min(100, pct));
+    }
+    values[row.id] = pct;
+  });
+
+  function renderCourses() {
+    var container = el("course-list");
+    container.innerHTML = "";
+    COURSES.forEach(function (c) {
+      var row = document.createElement("div");
+      row.className = "course-row";
+      row.dataset.courseId = c.id;
+
+      var head = document.createElement("div");
+      head.className = "course-row__head";
+      var nameEl = document.createElement("p");
+      nameEl.className = "course-row__name";
+      var displayName = c.name.length > 45 ? c.name.slice(0, 45) + "…" : c.name;
+      nameEl.textContent = displayName;
+      nameEl.title = c.name;
+
+      var pctEl = document.createElement("p");
+      pctEl.className = "course-row__pct";
+      pctEl.id = "pct-" + c.id;
+
+      head.appendChild(nameEl);
+      head.appendChild(pctEl);
+
+      var range = document.createElement("input");
+      range.type = "range";
+      range.min = "0";
+      range.max = "100";
+      range.step = "1";
+      range.value = String(values[c.id]);
+      range.setAttribute("aria-label", c.name + " progress");
+      range.addEventListener("input", function () {
+        values[c.id] = Number(range.value);
+        saveStoredPercent(c.id, values[c.id]);
+        syncRow(c.id, range.value);
+        updateAll();
+      });
+
+      var bar = document.createElement("div");
+      bar.className = "course-row__bar";
+      var fill = document.createElement("div");
+      fill.className = "course-row__bar-fill";
+      fill.id = "fill-" + c.id;
+      bar.appendChild(fill);
+
+      row.appendChild(head);
+      row.appendChild(range);
+      row.appendChild(bar);
+      container.appendChild(row);
+
+      syncRow(c.id, values[c.id]);
+    });
+  }
+
+  function syncRow(id, v) {
+    var num = Number(v);
+    var pctNode = el("pct-" + id);
+    if (pctNode) pctNode.textContent = num + "%";
+    var fill = el("fill-" + id);
+    if (fill) fill.style.width = num + "%";
+  }
+
+  function renderRoles(floor) {
+    var wrap = el("role-chips");
+    wrap.innerHTML = "";
+    ROLES.forEach(function (r) {
+      var chip = document.createElement("span");
+      chip.className = "chip " + (floor >= r.floorMin ? "chip--role-qualified" : "chip--role-locked");
+      chip.textContent = r.name;
+      chip.setAttribute("aria-label", r.name + (floor >= r.floorMin ? ", qualified" : ", locked"));
+      wrap.appendChild(chip);
+    });
+  }
+
+  function renderSkills(unlockedExtra) {
+    var wrap = el("skill-chips");
+    wrap.innerHTML = "";
+    var allSkills = BASE_SKILLS.concat(unlockedExtra);
+    allSkills.forEach(function (s) {
+      var chip = document.createElement("span");
+      chip.className = "chip chip--skill-active";
+      chip.textContent = s;
+      wrap.appendChild(chip);
+    });
+  }
+
+  function updateAll() {
+    var floor = computeFloor(values);
+    var ceil = computeCeil(values);
+    el("metric-floor").textContent = formatSalaryK(floor);
+    el("metric-ceil").textContent = formatSalaryK(ceil);
+    el("salary-range").textContent = formatSalaryK(floor) + " – " + formatSalaryK(ceil);
+    el("metric-avg").textContent = averageProgress(values) + "%";
+    el("current-title").textContent = titleForFloor(floor);
+    el("next-unlock").textContent = nextUnlockHint(values);
+
+    var extra = collectUnlockedSkills(values);
+    el("metric-skills").textContent = String(BASE_SKILLS.length + extra.length);
+    renderRoles(floor);
+    renderSkills(extra);
+  }
+
+  function attachExportSkills() {
+    var btn = el("export-skills-btn");
+    if (!btn) return;
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      btn.disabled = true;
+      btn.title = "Clipboard API unavailable in this context (try https or localhost).";
+      return;
+    }
+    var defaultLabel = btn.textContent.trim();
+    btn.addEventListener("click", function () {
+      var text = resumeSkillsBulletText(values);
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = "Copied to clipboard";
+        setTimeout(function () {
+          btn.textContent = defaultLabel;
+        }, 2000);
+      }).catch(function () {
+        btn.textContent = "Copy failed";
+        setTimeout(function () {
+          btn.textContent = defaultLabel;
+        }, 2000);
+      });
+    });
+  }
+
+  renderCourses();
+  updateAll();
+  attachExportSkills();
+})();
+  </script>
+  <script>
+(function () {
+  "use strict";
+
+  var TIERS = typeof COMPOUND_TIERS !== "undefined" ? COMPOUND_TIERS : null;
+  var mount = document.getElementById("roadmap-grid");
+  if (!TIERS || !mount || !TIERS.length) {
+    if (mount) {
+      mount.innerHTML = "<p class=\"roadmap-empty\">Portfolio tiers could not be loaded.</p>";
+    }
+    return;
+  }
+
+  var PROJECT_COUNT = 20;
+
+  function roadmapKey(tierId, projectIndex) {
+    return "roadmap-" + tierId + "-" + projectIndex;
+  }
+
+  function isRoadmapDone(tierId, projectIndex) {
+    try {
+      return localStorage.getItem(roadmapKey(tierId, projectIndex)) === "1";
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function setRoadmapDone(tierId, projectIndex, on) {
+    try {
+      var k = roadmapKey(tierId, projectIndex);
+      if (on) localStorage.setItem(k, "1");
+      else localStorage.removeItem(k);
+    } catch (err) {}
+  }
+
+  function countRoadmapDone(tierId) {
+    var n = 0;
+    var i;
+    for (i = 0; i < PROJECT_COUNT; i++) {
+      if (isRoadmapDone(tierId, i)) n++;
+    }
+    return n;
+  }
+
+  function updateRoadmapCard(wrap, tierId) {
+    var done = countRoadmapDone(tierId);
+    var pct = Math.round((done / PROJECT_COUNT) * 100);
+    var label = wrap.querySelector(".roadmap-card__progress-label");
+    var fill = wrap.querySelector(".roadmap-card__bar-fill");
+    if (label) {
+      label.textContent = done + " / " + PROJECT_COUNT + " projects started";
+    }
+    if (fill) {
+      fill.style.width = pct + "%";
+    }
+  }
+
+  TIERS.forEach(function (tier) {
+    var wrap = document.createElement("div");
+    wrap.className = "roadmap-card-wrap";
+    wrap.dataset.tierId = String(tier.id);
+
+    var card = document.createElement("button");
+    card.type = "button";
+    card.className = "roadmap-card";
+    card.setAttribute("aria-expanded", "false");
+    card.setAttribute("aria-controls", "roadmap-panel-" + tier.id);
+
+    var nameEl = document.createElement("p");
+    nameEl.className = "roadmap-card__name";
+    nameEl.textContent = tier.name;
+
+    var hintEl = document.createElement("p");
+    hintEl.className = "roadmap-card__hint";
+    hintEl.textContent = tier.hint;
+
+    var progLabel = document.createElement("p");
+    progLabel.className = "roadmap-card__progress-label";
+
+    var bar = document.createElement("div");
+    bar.className = "roadmap-card__bar";
+    var barFill = document.createElement("div");
+    barFill.className = "roadmap-card__bar-fill";
+    bar.appendChild(barFill);
+
+    card.appendChild(nameEl);
+    card.appendChild(hintEl);
+    card.appendChild(progLabel);
+    card.appendChild(bar);
+
+    var panel = document.createElement("div");
+    panel.className = "roadmap-card__panel";
+    panel.id = "roadmap-panel-" + tier.id;
+    panel.hidden = true;
+
+    tier.projects.forEach(function (row, idx) {
+      var title = row[0];
+      var id = "roadmap-cb-" + tier.id + "-" + idx;
+
+      var label = document.createElement("label");
+      label.className = "roadmap-check";
+
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.id = id;
+      cb.checked = isRoadmapDone(tier.id, idx);
+      cb.addEventListener("change", function () {
+        setRoadmapDone(tier.id, idx, cb.checked);
+        updateRoadmapCard(wrap, tier.id);
+      });
+
+      var span = document.createElement("span");
+      span.className = "roadmap-check__text";
+      span.textContent = title;
+
+      label.setAttribute("for", id);
+      label.appendChild(cb);
+      label.appendChild(span);
+      panel.appendChild(label);
+    });
+
+    card.addEventListener("click", function () {
+      var open = panel.hidden;
+      panel.hidden = !open;
+      card.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    wrap.appendChild(card);
+    wrap.appendChild(panel);
+    mount.appendChild(wrap);
+
+    updateRoadmapCard(wrap, tier.id);
+  });
+})();
+  </script>
+  <script src="portfolio_projects.js"></script>
 </body>
 </html>
