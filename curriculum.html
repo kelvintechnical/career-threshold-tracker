@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>160 projects by skill tier — Career toolkit</title>
+<title>Engineering Journal — 100 Compounding Projects</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
@@ -12,59 +12,45 @@
 <nav class="site-nav">
   <a href="index.html" class="site-brand-link">Kel — Toolkit</a>
   <a href="career_threshold_tracker.html">Tracker</a>
-  <a href="curriculum.html" class="nav-hi">160 projects</a>
+  <a href="curriculum.html" class="nav-hi">100 projects</a>
   <a href="capstones.html">Udemy capstones</a>
 </nav>
 
-<nav class="tier-tabs" aria-label="Jump to tier">
-  <span class="tier-tab tier-tab-overview is-active" aria-current="page">Overview</span>
-  <a class="tier-tab" href="tier-1.html" title="Tier 1 — No experience / unfamiliar">1</a>
-  <a class="tier-tab" href="tier-2.html" title="Tier 2 — Novice">2</a>
-  <a class="tier-tab" href="tier-3.html" title="Tier 3 — Beginner">3</a>
-  <a class="tier-tab" href="tier-4.html" title="Tier 4 — Beginner–intermediate">4</a>
-  <a class="tier-tab" href="tier-5.html" title="Tier 5 — Intermediate">5</a>
-  <a class="tier-tab" href="tier-6.html" title="Tier 6 — Upper intermediate">6</a>
-  <a class="tier-tab" href="tier-7.html" title="Tier 7 — Advanced">7</a>
-  <a class="tier-tab" href="tier-8.html" title="Tier 8 — Expert">8</a>
-</nav>
+<section class="sub-hero">
+  <h1>Engineering Journal</h1>
+  <p>100 projects. 5 stacks. Every version builds on the last — from syntax to systems to research.</p>
+  <div id="projects-summary" class="projects-summary" aria-live="polite"></div>
+</section>
 
-<div class="sub-hero">
-  <h1>160 compounding GitHub projects</h1>
-  <p>Open a <strong>tier page</strong> below. Each of the 20 tasks expands to show what you learn, roles, GitHub signal — and a <strong>copy-paste prompt</strong> for ChatGPT, Claude, Gemini, or Copilot to mentor you step by step.</p>
+<section id="stack-nav" class="stack-nav" aria-label="Stack navigation"></section>
+
+<div class="portfolio-layout">
+  <main id="stacks-mount" class="portfolio-main"></main>
+  <aside class="learning-sidebar">
+    <h3>What to build next</h3>
+    <div id="next-projects"></div>
+    <p class="sidebar-note">Tip: Use each <strong>Learn This</strong> prompt in Claude or GPT to get a guided implementation lesson.</p>
+  </aside>
 </div>
 
-<div class="proj-panel" style="margin-top:0">
-  <div class="proj-title">How to use the LLM prompts</div>
-  <p class="proj-intro" style="margin-bottom:0">
-    1) Pick your tier and expand a project.<br>
-    2) Click <strong>Copy prompt</strong> and paste into your assistant.<br>
-    3) Answer its clarifying questions; work through the checklist it gives you.<br>
-    4) Ship Shippable PRs to a public repo and link it from your profile README.
-  </p>
+<div id="learn-modal" class="learn-modal" aria-hidden="true">
+  <div class="learn-dialog" role="dialog" aria-modal="true" aria-label="LLM Learning Prompt">
+    <header class="learn-header">
+      <h3 data-modal-title>LLM Learning Prompt</h3>
+      <button type="button" data-close class="learn-close" aria-label="Close">×</button>
+    </header>
+    <div class="learn-body">
+      <textarea readonly data-modal-text class="learn-text"></textarea>
+    </div>
+    <footer class="learn-footer">
+      <button type="button" data-copy class="copy-btn">Copy to Clipboard</button>
+      <a data-claude class="copy-btn" target="_blank" rel="noreferrer" href="#">Open in Claude ↗</a>
+    </footer>
+  </div>
 </div>
 
-<div class="compound-legend" aria-label="Skill tiers" style="margin-top:1.25rem">
-  <span><strong>1</strong> — No experience</span>
-  <span><strong>2</strong> — Novice</span>
-  <span><strong>3</strong> — Beginner</span>
-  <span><strong>4</strong> — Beginner–intermediate</span>
-  <span><strong>5</strong> — Intermediate</span>
-  <span><strong>6</strong> — Upper intermediate</span>
-  <span><strong>7</strong> — Advanced</span>
-  <span><strong>8</strong> — Expert</span>
-</div>
+<p class="save-note">Project data source: <code>projects.config.json</code>. Update JSON and the page updates automatically.</p>
 
-<div class="tier-grid">
-  <a class="tier-link-card" href="tier-1.html"><span class="tn">1</span><div><div class="tt">No experience / unfamiliar</div><div class="td">20 projects · tool &amp; repo literacy</div></div></a>
-  <a class="tier-link-card" href="tier-2.html"><span class="tn">2</span><div><div class="tt">Novice</div><div class="td">20 projects · follow-along builds</div></div></a>
-  <a class="tier-link-card" href="tier-3.html"><span class="tn">3</span><div><div class="tt">Beginner</div><div class="td">20 projects · simple shipped pieces</div></div></a>
-  <a class="tier-link-card" href="tier-4.html"><span class="tn">4</span><div><div class="tt">Beginner–intermediate</div><div class="td">20 projects · connecting concepts</div></div></a>
-  <a class="tier-link-card" href="tier-5.html"><span class="tn">5</span><div><div class="tt">Intermediate</div><div class="td">20 projects · independent delivery</div></div></a>
-  <a class="tier-link-card" href="tier-6.html"><span class="tn">6</span><div><div class="tt">Upper intermediate</div><div class="td">20 projects · edge cases &amp; optimization</div></div></a>
-  <a class="tier-link-card" href="tier-7.html"><span class="tn">7</span><div><div class="tt">Advanced</div><div class="td">20 projects · system design</div></div></a>
-  <a class="tier-link-card" href="tier-8.html"><span class="tn">8</span><div><div class="tt">Expert</div><div class="td">20 projects · teach &amp; lead</div></div></a>
-</div>
-
-<p class="save-note">Also see <a href="capstones.html" class="text-link">Udemy capstones + course-level LLM prompts</a> (per-course copy-paste).</p>
+<script src="portfolio_projects.js"></script>
 </body>
 </html>
