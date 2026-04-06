@@ -17,7 +17,7 @@
         <button type="button" class="export-skills-btn" id="export-skills-btn" aria-label="Copy unlocked resume skills to clipboard as a bullet list">
           Export resume skills
         </button>
-        <p class="zone-header__updated">Last updated: July 5, 2025</p>
+        <p class="zone-header__updated">Last updated: April 6, 2026</p>
       </div>
     </header>
 
@@ -132,34 +132,17 @@
   var BASE_FLOOR = 78000;
   var BASE_CEIL = 115000;
 
-  /** Salary thresholds: keys MUST match UDEMY_COURSES ids (donner, proj40, portilla, bio_sid, bio_mar — not agentic/ds_ml/…). */
+  /** Salary thresholds: keys MUST match UDEMY_COURSES ids. Use thresholds [[0,0]] so default % (start) applies without extra salary math. */
   var COURSE_LOGIC_BY_ID = {
-    pytorch: {
-      shortHint: "PyTorch",
-      start: 8,
-      thresholds: [[10, 5000], [25, 8000], [50, 14000], [75, 18000], [100, 25000]],
-      skills: [
-        { pct: 10, list: ["Tensor operations", "PyTorch basics"] },
-        { pct: 25, list: ["Neural network design", "Loss functions"] },
-        { pct: 50, list: ["CNNs / RNNs", "Transfer learning"] },
-        { pct: 75, list: ["Custom training loops", "Model evaluation"] },
-        { pct: 100, list: ["PyTorch production", "Deep learning"] }
-      ]
-    },
-    donner: {
-      shortHint: "Agentic/MCP",
-      start: 3,
-      thresholds: [[15, 6000], [40, 12000], [75, 20000], [100, 28000]],
-      skills: [
-        { pct: 15, list: ["LLM API integration", "Prompt engineering"] },
-        { pct: 40, list: ["AI agent design", "Tool calling"] },
-        { pct: 75, list: ["MCP architecture", "Agentic pipelines"] },
-        { pct: 100, list: ["Multi-agent systems", "Production AI agents"] }
-      ]
+    cohen_dl: {
+      shortHint: "DL (Cohen)",
+      start: 1,
+      thresholds: [[0, 0]],
+      skills: []
     },
     aws_ml: {
       shortHint: "AWS MLA",
-      start: 1,
+      start: 3,
       thresholds: [[30, 7000], [70, 14000], [100, 22000]],
       skills: [
         { pct: 30, list: ["SageMaker basics", "AWS ML services"] },
@@ -167,25 +150,20 @@
         { pct: 100, list: ["AWS ML Engineer", "Cloud ML pipelines"] }
       ]
     },
-    proj40: {
-      shortHint: "DS & ML Projects",
-      start: 18,
-      thresholds: [[20, 4000], [50, 9000], [80, 15000], [100, 18000]],
-      skills: [
-        { pct: 20, list: ["Pandas / NumPy", "EDA pipelines"] },
-        { pct: 50, list: ["Feature engineering", "Sklearn pipelines"] },
-        { pct: 80, list: ["End-to-end ML projects", "Model deployment"] },
-        { pct: 100, list: ["Production ML portfolio"] }
-      ]
-    },
-    portilla: {
-      shortHint: "Python DS",
+    intro_python: {
+      shortHint: "Intro Python",
       start: 0,
-      thresholds: [[25, 3000], [60, 7000], [100, 11000]],
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    bio_mar: {
+      shortHint: "Intro Bio",
+      start: 6,
+      thresholds: [[20, 3000], [50, 7000], [100, 12000]],
       skills: [
-        { pct: 25, list: ["Python data stack", "Matplotlib / Seaborn"] },
-        { pct: 60, list: ["Statistical analysis", "Data wrangling"] },
-        { pct: 100, list: ["Python DS fluency"] }
+        { pct: 20, list: ["DNA / RNA parsing", "GC content analysis"] },
+        { pct: 50, list: ["Sequence alignment", "FASTA processing"] },
+        { pct: 100, list: ["Bioinformatics scripting"] }
       ]
     },
     bio_sid: {
@@ -198,15 +176,85 @@
         { pct: 100, list: ["Computational biology pipeline"] }
       ]
     },
-    bio_mar: {
-      shortHint: "Intro Bio",
-      start: 6,
-      thresholds: [[20, 3000], [50, 7000], [100, 12000]],
+    donner: {
+      shortHint: "Agentic/MCP",
+      start: 29,
+      thresholds: [[15, 6000], [40, 12000], [75, 20000], [100, 28000]],
       skills: [
-        { pct: 20, list: ["DNA / RNA parsing", "GC content analysis"] },
-        { pct: 50, list: ["Sequence alignment", "FASTA processing"] },
-        { pct: 100, list: ["Bioinformatics scripting"] }
+        { pct: 15, list: ["LLM API integration", "Prompt engineering"] },
+        { pct: 40, list: ["AI agent design", "Tool calling"] },
+        { pct: 75, list: ["MCP architecture", "Agentic pipelines"] },
+        { pct: 100, list: ["Multi-agent systems", "Production AI agents"] }
       ]
+    },
+    mega: {
+      shortHint: "Mega Course",
+      start: 2,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    pytorch: {
+      shortHint: "PyTorch",
+      start: 0,
+      thresholds: [[10, 5000], [25, 8000], [50, 14000], [75, 18000], [100, 25000]],
+      skills: [
+        { pct: 10, list: ["Tensor operations", "PyTorch basics"] },
+        { pct: 25, list: ["Neural network design", "Loss functions"] },
+        { pct: 50, list: ["CNNs / RNNs", "Transfer learning"] },
+        { pct: 75, list: ["Custom training loops", "Model evaluation"] },
+        { pct: 100, list: ["PyTorch production", "Deep learning"] }
+      ]
+    },
+    proj40: {
+      shortHint: "DS & ML Projects",
+      start: 9,
+      thresholds: [[20, 4000], [50, 9000], [80, 15000], [100, 18000]],
+      skills: [
+        { pct: 20, list: ["Pandas / NumPy", "EDA pipelines"] },
+        { pct: 50, list: ["Feature engineering", "Sklearn pipelines"] },
+        { pct: 80, list: ["End-to-end ML projects", "Model deployment"] },
+        { pct: 100, list: ["Production ML portfolio"] }
+      ]
+    },
+    portilla: {
+      shortHint: "Python DS",
+      start: 6,
+      thresholds: [[25, 3000], [60, 7000], [100, 11000]],
+      skills: [
+        { pct: 25, list: ["Python data stack", "Matplotlib / Seaborn"] },
+        { pct: 60, list: ["Statistical analysis", "Data wrangling"] },
+        { pct: 100, list: ["Python DS fluency"] }
+      ]
+    },
+    automate_boring: {
+      shortHint: "Automate",
+      start: 9,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    agents: {
+      shortHint: "Agents (365)",
+      start: 59,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    php_scratch: {
+      shortHint: "PHP scratch",
+      start: 0,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    react_mega: {
+      shortHint: "React mega",
+      start: 3,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    php_mysql: {
+      shortHint: "PHP + MySQL",
+      start: 1,
+      thresholds: [[0, 0]],
+      skills: []
     }
   };
 
