@@ -200,10 +200,15 @@ body {
 
 .course-row__head {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
   margin-bottom: 0.4rem;
+}
+
+.course-row__namecol {
+  min-width: 0;
+  flex: 1;
 }
 
 .course-row__name {
@@ -216,6 +221,15 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.course-row__instructor {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.3;
+  max-width: 50ch;
 }
 
 .course-row__pct {

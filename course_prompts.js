@@ -4,36 +4,12 @@
 (function () {
   const UDEMY_COURSES = [
     {
-      id: "cohen_dl",
-      title: "A deep understanding of deep learning (with Python intro)",
-      instructor: "Mike X Cohen",
-      tech: "Neural net foundations, gradients, architectures, Python numerics before frameworks.",
+      id: "fullstack_ai_basak",
+      title: "The Complete Full Stack AI Engineering Bootcamp",
+      instructor: "Aritra Basak",
+      tech: "End-to-end AI engineering: APIs, models, agents, deployment, and full-stack integration.",
       focus:
-        "After each section, restate the math in your own words and implement the smallest numpy version you can before moving on. Note how each idea maps onto tensors and autograd when you reach PyTorch.",
-    },
-    {
-      id: "aws_ml",
-      title: "AWS Certified Machine Learning Engineer - Associate MLA-C01",
-      instructor: "Nikolai Schuler",
-      tech: "SageMaker, S3, IAM, training and inference patterns, MLOps-oriented AWS.",
-      focus:
-        "For every lab, diagram IAM boundaries and data flow (S3 → train → endpoint). Tie cert objectives to your PyTorch artifact from the Neagoie course so study stays anchored in something you built.",
-    },
-    {
-      id: "intro_python",
-      title: "Introduction To Python Programming",
-      instructor: "Avinash Jain, The Codex",
-      tech: "Python syntax, control flow, functions, small programs.",
-      focus:
-        "Turn each section into a tiny GitHub file (functions + tests or asserts). Tie every exercise to a future API or script you will call from a larger app.",
-    },
-    {
-      id: "bio_mar",
-      title: "Introduction to programming for Bioinformatics with Python",
-      instructor: "Diego Mariano, Ph.D.",
-      tech: "Biopython, NCBI/Entrez, alignments, scripting for biological data.",
-      focus:
-        "Respect API rate limits and reproducible downloads. Script every pipeline step so an agent could call your functions as tools (fetch → parse → summarize).",
+        "Ship one runnable artifact per major section in a single spine repo; document how each layer (data, model, API, UI) talks to the others.",
     },
     {
       id: "bio_sid",
@@ -52,9 +28,17 @@
         "Map each lecture to a repo milestone: tool registry → RAG → MCP server. Keep a CHANGELOG.md of which tools your agent exposes and version your prompts alongside model artifacts.",
     },
     {
+      id: "aws_ml",
+      title: "AWS Certified Machine Learning Engineer - Associate MLA-C01",
+      instructor: "Nikolai Schuler",
+      tech: "SageMaker, S3, IAM, training and inference patterns, MLOps-oriented AWS.",
+      focus:
+        "For every lab, diagram IAM boundaries and data flow (S3 → train → endpoint). Tie cert objectives to your PyTorch artifact from the Neagoie/Bourke course so study stays anchored in something you built.",
+    },
+    {
       id: "mega",
       title: "The Python Mega Course: Build 10 Real World Applications",
-      instructor: "Ardit Sulce | 600,000+ Students",
+      instructor: "Ardit Sulce",
       tech: "GUIs, Flask, databases, APIs, broader Python application structure.",
       focus:
         "After each app, write a 5-line README: inputs, outputs, how to run. Choose one Flask/API module as the long-term shell where ML and agent routes will mount later.",
@@ -68,12 +52,44 @@
         "Every module: save checkpoints, log shapes, and write a one-paragraph model card (data, metric, failure modes). Revisit earlier lessons when you add a new dataset—do not skip review exercises.",
     },
     {
+      id: "cohen_dl",
+      title: "A deep understanding of deep learning (with Python intro)",
+      instructor: "Mike X Cohen",
+      tech: "Neural net foundations, gradients, architectures, Python numerics before frameworks.",
+      focus:
+        "After each section, restate the math in your own words and implement the smallest numpy version you can before moving on. Note how each idea maps onto tensors and autograd when you reach PyTorch.",
+    },
+    {
+      id: "bio_mar",
+      title: "Introduction to programming for Bioinformatics with Python",
+      instructor: "Diego Mariano, Ph.D.",
+      tech: "Biopython, NCBI/Entrez, alignments, scripting for biological data.",
+      focus:
+        "Respect API rate limits and reproducible downloads. Script every pipeline step so an agent could call your functions as tools (fetch → parse → summarize).",
+    },
+    {
       id: "proj40",
       title: "40 Real World Data Science, Machine Learning Projects 2025",
-      instructor: "Pianalytix • 75,000+ Students Worldwide",
+      instructor: "Pianalytix",
       tech: "Many end-to-end project shapes — tabular, NLP, CV.",
       focus:
         "Do not scatter: pick three projects maximum and polish them like products (README, repro steps, figures). Reuse the same project template folder structure each time to compound habits.",
+    },
+    {
+      id: "angela_100days",
+      title: "100 Days of Code™: The Complete Python Pro Bootcamp",
+      instructor: "Dr. Angela Yu",
+      tech: "Python fluency via daily projects: syntax, OOP, data structures, web and data touchpoints.",
+      focus:
+        "Use the 100-day cadence as a habit engine: consolidate every ~10 days into a tagged checkpoint with a one-paragraph retrospective.",
+    },
+    {
+      id: "traversy_js",
+      title: "Modern JavaScript From The Beginning 2.0 (Just Updated)",
+      instructor: "Brad Traversy",
+      tech: "Modern JavaScript: DOM, async, modules, fetch, tooling, and patterns for real frontends.",
+      focus:
+        "After guided builds, reproduce the smallest viable version from memory in a scratch file so the patterns stick before you lean on frameworks.",
     },
     {
       id: "portilla",
@@ -90,6 +106,14 @@
       tech: "pathlib, regex, CSV/Excel/PDF, scheduling, practical automation.",
       focus:
         "Pick one repetitive real task (reports, renames, inbox exports) and automate it end-to-end. You will later wrap these utilities as tools for agents or cron jobs behind your API.",
+    },
+    {
+      id: "intro_python",
+      title: "Introduction To Python Programming",
+      instructor: "Avinash Jain, The Codex",
+      tech: "Python syntax, control flow, functions, small programs.",
+      focus:
+        "Turn each section into a tiny GitHub file (functions + tests or asserts). Tie every exercise to a future API or script you will call from a larger app.",
     },
     {
       id: "agents",
@@ -110,7 +134,7 @@
     {
       id: "react_mega",
       title: "React Mega Course: Build 50 Real World Projects in 50 Days",
-      instructor: "Sufa Digital | 16,000+ Enrollments Worldwide",
+      instructor: "Sufa Digital",
       tech: "React, hooks, routing, state, consuming APIs.",
       focus:
         "For each mini-project, add a typed or documented contract for the JSON your UI expects. You will point the same UI at your Python /predict and agent chat endpoints later.",

@@ -17,7 +17,7 @@
         <button type="button" class="export-skills-btn" id="export-skills-btn" aria-label="Copy unlocked resume skills to clipboard as a bullet list">
           Export resume skills
         </button>
-        <p class="zone-header__updated">Last updated: April 6, 2026</p>
+        <p class="zone-header__updated">Last updated: April 7, 2026</p>
       </div>
     </header>
 
@@ -134,37 +134,11 @@
 
   /** Salary thresholds: keys MUST match UDEMY_COURSES ids. Use thresholds [[0,0]] so default % (start) applies without extra salary math. */
   var COURSE_LOGIC_BY_ID = {
-    cohen_dl: {
-      shortHint: "DL (Cohen)",
-      start: 1,
-      thresholds: [[0, 0]],
-      skills: []
-    },
-    aws_ml: {
-      shortHint: "AWS MLA",
-      start: 3,
-      thresholds: [[30, 7000], [70, 14000], [100, 22000]],
-      skills: [
-        { pct: 30, list: ["SageMaker basics", "AWS ML services"] },
-        { pct: 70, list: ["MLOps on AWS", "Model deployment"] },
-        { pct: 100, list: ["AWS ML Engineer", "Cloud ML pipelines"] }
-      ]
-    },
-    intro_python: {
-      shortHint: "Intro Python",
+    fullstack_ai_basak: {
+      shortHint: "Full-stack AI",
       start: 0,
       thresholds: [[0, 0]],
       skills: []
-    },
-    bio_mar: {
-      shortHint: "Intro Bio",
-      start: 6,
-      thresholds: [[20, 3000], [50, 7000], [100, 12000]],
-      skills: [
-        { pct: 20, list: ["DNA / RNA parsing", "GC content analysis"] },
-        { pct: 50, list: ["Sequence alignment", "FASTA processing"] },
-        { pct: 100, list: ["Bioinformatics scripting"] }
-      ]
     },
     bio_sid: {
       shortHint: "Applied Bio",
@@ -187,6 +161,16 @@
         { pct: 100, list: ["Multi-agent systems", "Production AI agents"] }
       ]
     },
+    aws_ml: {
+      shortHint: "AWS MLA",
+      start: 3,
+      thresholds: [[30, 7000], [70, 14000], [100, 22000]],
+      skills: [
+        { pct: 30, list: ["SageMaker basics", "AWS ML services"] },
+        { pct: 70, list: ["MLOps on AWS", "Model deployment"] },
+        { pct: 100, list: ["AWS ML Engineer", "Cloud ML pipelines"] }
+      ]
+    },
     mega: {
       shortHint: "Mega Course",
       start: 2,
@@ -205,6 +189,22 @@
         { pct: 100, list: ["PyTorch production", "Deep learning"] }
       ]
     },
+    cohen_dl: {
+      shortHint: "DL (Cohen)",
+      start: 1,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    bio_mar: {
+      shortHint: "Intro Bio",
+      start: 6,
+      thresholds: [[20, 3000], [50, 7000], [100, 12000]],
+      skills: [
+        { pct: 20, list: ["DNA / RNA parsing", "GC content analysis"] },
+        { pct: 50, list: ["Sequence alignment", "FASTA processing"] },
+        { pct: 100, list: ["Bioinformatics scripting"] }
+      ]
+    },
     proj40: {
       shortHint: "DS & ML Projects",
       start: 9,
@@ -215,6 +215,18 @@
         { pct: 80, list: ["End-to-end ML projects", "Model deployment"] },
         { pct: 100, list: ["Production ML portfolio"] }
       ]
+    },
+    angela_100days: {
+      shortHint: "100 Days Python",
+      start: 1,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    traversy_js: {
+      shortHint: "Modern JS",
+      start: 4,
+      thresholds: [[0, 0]],
+      skills: []
     },
     portilla: {
       shortHint: "Python DS",
@@ -229,6 +241,12 @@
     automate_boring: {
       shortHint: "Automate",
       start: 9,
+      thresholds: [[0, 0]],
+      skills: []
+    },
+    intro_python: {
+      shortHint: "Intro Python",
+      start: 0,
       thresholds: [[0, 0]],
       skills: []
     },
@@ -277,6 +295,7 @@
     return {
       id: c.id,
       name: c.title,
+      instructor: c.instructor,
       shortHint: logic.shortHint,
       start: logic.start,
       thresholds: logic.thresholds,
@@ -478,17 +497,26 @@
 
       var head = document.createElement("div");
       head.className = "course-row__head";
+      var nameCol = document.createElement("div");
+      nameCol.className = "course-row__namecol";
       var nameEl = document.createElement("p");
       nameEl.className = "course-row__name";
       var displayName = c.name.length > 45 ? c.name.slice(0, 45) + "…" : c.name;
       nameEl.textContent = displayName;
       nameEl.title = c.name;
+      nameCol.appendChild(nameEl);
+      if (c.instructor) {
+        var instEl = document.createElement("p");
+        instEl.className = "course-row__instructor";
+        instEl.textContent = c.instructor;
+        nameCol.appendChild(instEl);
+      }
 
       var pctEl = document.createElement("p");
       pctEl.className = "course-row__pct";
       pctEl.id = "pct-" + c.id;
 
-      head.appendChild(nameEl);
+      head.appendChild(nameCol);
       head.appendChild(pctEl);
 
       var range = document.createElement("input");
@@ -497,7 +525,10 @@
       range.max = "100";
       range.step = "1";
       range.value = String(values[c.id]);
-      range.setAttribute("aria-label", c.name + " progress");
+      range.setAttribute(
+        "aria-label",
+        c.name + (c.instructor ? " (" + c.instructor + ")" : "") + " progress"
+      );
       range.addEventListener("input", function () {
         values[c.id] = Number(range.value);
         saveStoredPercent(c.id, values[c.id]);
