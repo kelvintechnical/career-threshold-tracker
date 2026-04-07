@@ -91,7 +91,7 @@
 
     <section class="zone-roadmap" aria-labelledby="roadmap-heading">
       <h2 class="zone-roadmap__title" id="roadmap-heading">Portfolio Roadmap</h2>
-      <p class="zone-roadmap__subtitle">160 projects across 8 tiers — track what you've started</p>
+      <p class="zone-roadmap__subtitle">160 hire-aligned milestones across 8 tiers — each tier is one flagship portfolio arc</p>
       <div class="roadmap-grid" id="roadmap-grid"></div>
     </section>
 
@@ -680,7 +680,7 @@
     var label = wrap.querySelector(".roadmap-card__progress-label");
     var fill = wrap.querySelector(".roadmap-card__bar-fill");
     if (label) {
-      label.textContent = done + " / " + PROJECT_COUNT + " projects started";
+      label.textContent = done + " / " + PROJECT_COUNT + " milestones done";
     }
     if (fill) {
       fill.style.width = pct + "%";

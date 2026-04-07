@@ -1,6 +1,7 @@
 /**
- * 160 compounding portfolio projects (20 × 8 skill levels).
- * Loaded by career_threshold_tracker.html
+ * 160 hire-aligned portfolio milestones (20 × 8 skill tiers).
+ * Each tier is one coherent flagship arc; rows are shippable checkpoints with interview signal.
+ * Loaded by curriculum UIs and tier pages.
  */
 (function () {
   const TIERS = [
@@ -10,26 +11,26 @@
       hint: "Never done it · no real exposure",
       cls: "t1",
       projects: [
-        ["GitHub account + 2FA", "Account security, public profile basics, how issues and repos work.", "None yet — you’re building proof you can use industry tools.", "Public profile shows you’ve started the same toolchain employers scan for."],
-        ["Profile README stub", "Markdown on GitHub, personal branding, linking repos.", "Aspiring developer / student path visible to recruiters.", "Pinned README is a common first impression on your profile."],
-        ["Install Git; verify version", "CLI comfort, PATH, reading terminal output.", "IT-adjacent literacy; foundation for any dev role.", "Screenshot or note in a repo proves environment setup."],
-        ["Clone a public tutorial repo (read-only)", "git clone, folder hygiene, not committing upstream changes.", "Trainee / intern readiness.", "Shows you can follow instructions without breaking remotes."],
-        ["Create empty repo: learning-log", "Repo naming, visibility, first empty commit pattern.", "Organized learner signal.", "Dedicated repo for meta-learning reads professional."],
-        ["Add LICENSE or .gitignore", "Open-source norms, ignoring secrets and OS junk.", "Professional habits early.", "Reviewers see you think about legal/secret hygiene."],
-        ["Open repo in your editor from disk", "Workspace flow, file tree, saving files.", "Any software role baseline.", "Reduces onboarding friction in real teams."],
-        ["Install Python; verify py/python -V", "Runtime install, multiple versions awareness.", "Python-capable workstation.", "Job posts assume Python 3 on your machine."],
-        ["REPL: print hello; exit cleanly", "Interactive vs script mode, no infinite loops.", "Scripting literacy.", "Tiny commit shows Python runs end-to-end."],
-        ["Create + activate a virtual environment once", "venv/conda concept, isolation, why not pip global.", "Junior Python path.", "Employers expect venv in README instructions."],
-        ["Document toolchain in README (OS, versions)", "Technical writing, reproducibility mindset.", "Collaborator-ready.", "README is the #1 artifact hiring managers skim."],
-        ["Open a static .html file in the browser", "file:// vs server, basic HTML file lifecycle.", "Web curiosity.", "First step toward PHP/React courses."],
-        ["Write CHEATSHEET.md — 10 terms you learned", "Markdown headers, lists, linking docs.", "Communication skill for tickets/wiki.", "Shows meta-learning — valued in support and dev."],
-        ["Bookmark official Python + MDN docs", "Primary sources vs random blogs.", "Self-sufficient learner.", "Interviewers like “I read the docs when stuck.”"],
-        ["Folder screenshot in README", "Project structure narrative, assets in repo.", "Attention to presentation.", "Portfolio polish starts small."],
-        ["Fork an “awesome-*” list (practice)", "Fork vs clone, network graph, no PR needed.", "GitHub social graph literacy.", "Comfortable with standard OSS workflow surface."],
-        ["Turn on (or tune) repo notifications", "GitHub settings, email noise control.", "Async collaboration awareness.", "Mirrors real team notification hygiene."],
-        ["Open and close a test Issue on your repo", "Issues as work items, markdown in comments.", "Agile/Jira analogue.", "Issue history is portfolio evidence of process."],
-        ["Pin learning-log on your GitHub profile", "Profile curation, ordering projects.", "Personal brand for hiring.", "Recruiters see intentional ordering."],
-        ["Write GOALS.md — 3-month outcome in one paragraph", "Goal setting, measurable outcomes.", "Career ownership signal.", "Coaches and mentors can align with your stated goals."]
+        ["Public GitHub profile README", "Headline, target roles (e.g. AI / bio software), link to flagship repo and contact.", "Any technical hire funnel; recruiters skim this first.", "Shows intent and professionalism before they open code."],
+        ["Flagship repo scaffold: sequence-stats-cli", "LICENSE (e.g. MIT), .gitignore, pyproject.toml or pinned requirements.txt; first commit.", "Junior Python / tooling-ready candidate.", "One named repo beats twenty empty shells."],
+        ["FASTA parser module", "Multi-record FASTA, headers vs sequence lines, ACGTN validation, Windows/Unix newlines.", "Bioinformatics analyst path.", "Demonstrates file formats matter to you."],
+        ["Per-sequence metrics core", "Length, GC%, ambiguous-base counts; pure functions testable in isolation.", "Data + biology literacy.", "Interview: you can explain the biology and the code."],
+        ["CLI entry point (argparse)", "Input path, --help, stderr errors, non-zero exit codes on bad input.", "Automation / CLI engineer habits.", "Employers expect CLIs you can run from README."],
+        ["pytest suite (≥5 tests)", "Malformed FASTA, empty file, single record, edge bases; tmp_path fixtures.", "Quality-minded developer.", "Tests differentiate candidates immediately."],
+        ["GitHub Action: lint + test on push", "Ruff or python -m compileall + pytest; green badge in README.", "CI-aware junior.", "Green badge is a hiring filter for serious teams."],
+        ["README: Problem → Install → Run → Example", "Copy-paste commands, sample output block, stated limitations.", "Collaboration-ready engineer.", "This is the #1 artifact hiring managers read."],
+        ["docs/ARCHITECTURE.md", "5–10 lines or one diagram: file → parse → metrics → stdout/JSON.", "Systems thinking at starter level.", "Shows you see beyond line-by-line coding."],
+        ["Stdin mode + file mode", "Accept piped input or path; document both in README.", "Unix-literate developer.", "Signals production scripting comfort."],
+        ["--format json output", "Machine-readable rows for chaining; stable keys documented.", "API-minded engineer.", "Bridges CLI work to later services."],
+        ["Type hints on public functions", "Return types and Args; mypy optional later.", "Professional Python baseline.", "Typed code reads like team code."],
+        ["CHANGELOG.md + tag v0.1.0", "Initial release notes; GitHub Release optional.", "Shipping discipline.", "Version tags imply you finish things."],
+        ["Issue → PR lifecycle (solo ok)", "Open issue, branch, PR, merge, close issue with link.", "Agile / GitHub flow.", "Mirrors real team process."],
+        ["SECURITY.md stub", "How to report vulnerabilities; no paranoia essay.", "Security-aware contributor.", "Expected on mature OSS."],
+        ["Performance / scale note in README", "Honest max file size or sequence count tested.", "Practical engineer.", "Shows you measure instead of guessing."],
+        ["GOALS.md (90-day paragraph)", "One paragraph: role target + proof you will ship (link this repo).", "Career ownership.", "Mentors and recruiters align on your stated outcome."],
+        ["Pin flagship + polish profile order", "Pin sequence-stats-cli; order repos intentionally.", "Personal brand for hiring.", "Curated profile reads deliberate."],
+        ["README badges: CI + Python version", "Shields.io or native badges; link to Actions.", "Polished portfolio.", "Small signal of attention to detail."],
+        ["docs/INTERVIEW.md", "3-sentence elevator pitch + 5 interview Q&A you want to answer about this repo.", "Interview prep artifact.", "Turns the repo into a rehearsed narrative."]
       ]
     },
     {
@@ -38,26 +39,26 @@
       hint: "Just started · can follow instructions, not independent yet",
       cls: "t2",
       projects: [
-        ["LLM dev venv: Python + pinned openai (or SDK you use)", "Isolate dependencies; match Ed Donner stack versions from lecture notes; reproducible installs.", "LLM engineer trainee (Python path).", "README + requirements.txt proves you can ship a runnable AI repo."],
-        [".env + load_dotenv: API key never in Git", "Secret hygiene, .gitignore, .env.example placeholders — same pattern as the bootcamp setup.", "AI engineer (responsible basics).", "Interviewers check for leaked keys before they read your RAG code."],
-        ["First Chat Completions script (one user message)", "OpenAI client, model string, reading the response object; end-to-end proof the API works.", "Applied LLM developer (day one).", "Smallest artifact that says “I can call a frontier model from code.”"],
-        ["Message roles lab: system vs user vs assistant", "Steer behavior with system prompts; build the message list Donner-style before frameworks.", "Prompt engineer → LLM engineer bridge.", "Shows you understand the core API contract, not only copy-pasted snippets."],
-        ["Parameters sandbox: temperature, max_tokens, stop", "Run paired experiments; log outputs; connect knobs to creativity vs determinism.", "LLM application developer.", "Notebook or markdown table of comparisons reads like a disciplined learner."],
-        ["Streaming tokens to the terminal", "Stream iterator/async pattern; watch partial tokens; UX intuition for chat apps.", "Real-time AI UI path (Gradio/Streamlit later).", "Demonstrates you can build responsive interfaces, not only blocking calls."],
-        ["Gradio single-box “Ask the model” (bootcamp pattern)", "Minimal UI wiring inputs/outputs; local URL; matches the course’s quick demos.", "LLM engineer (product-facing).", "A screenshot + repo link is a standard portfolio piece for AI courses."],
-        ["Prompt template with variables (no magic strings)", "f-strings or a tiny template function; separate data from instructions.", "Maintainable LLM codebase habits.", "Hiring signal: you won’t ship 400-line one-off prompts in production."],
-        ["Few-shot prompt: 2–3 examples, then a new case", "In-context learning layout; label delimiters; watch format sensitivity.", "Classification / extraction prep (common Donner exercises).", "Mirrors how teams prototype tasks before fine-tuning."],
-        ["JSON-shaped answers: parse with json.loads safely", "Schema-ish instructions; repair strategy when the model drifts; guardrails thinking.", "Structured-output LLM workflows.", "Foundation for tools, agents, and evals later in the course."],
-        ["Token awareness: count or estimate prompt size", "tiktoken or rough heuristic; tie size to cost/latency vocabulary.", "Cost-conscious LLM engineer.", "Shows you can reason about bills and context windows."],
-        ["Resilience: retries, backoff, friendly errors on API failures", "429/timeout handling; don’t crash the whole app on one glitch.", "Production-minded junior LLM engineer.", "Small but rare differentiator in beginner repos."],
-        ["Embeddings: embed two strings; cosine similarity (numpy)", "Vector intuition before RAG frameworks; normalize embeddings.", "RAG engineer foundations (Donner embedding sections).", "Proves you know what vector search is doing under the hood."],
-        ["Chunking pass: split a .txt for retrieval", "Chunk size/overlap; headings vs fixed windows; metadata dicts.", "Document AI / knowledge bases.", "Directly feeds your first vector store project."],
-        ["Vector store hello world: add chunks; query top-k", "Chroma, FAISS, or course-recommended store; persist locally.", "LLM engineer with retrieval skills.", "Standard interview story: “ingest → embed → query.”"],
-        ["Minimal RAG: retrieve top chunks → stuff into prompt → answer", "No fancy agents yet; explicit pipeline; cite which chunk influenced you.", "RAG application developer.", "This is the employability core of the Donner-style curriculum."],
-        ["LangChain (or course stack) minimal LCEL chain", "Prompt | chat model | output parser; compare to your hand-rolled RAG.", "Framework-literate LLM engineer.", "Signals you can work in team codebases that standardize on LangChain."],
-        ["One tool / function call the model can trigger", "Define a JSON schema tool; handle model tool_args; keep scope tiny (math, datetime, etc.).", "Tool-using agents (early agent track).", "Bridge from “chat” to “agent” without jumping to full LangGraph yet."],
-        ["Multi-turn Gradio chat with explicit history list", "Trim history for context limits; reset button; show you understand conversation state.", "Conversational AI engineer.", "Matches how the course builds interactive assistants before graphs."],
-        ["Capstone doc: README model card + limitations + safety", "Model choice, cost notes, hallucination risk, PII policy; link to Donner modules completed.", "Interview-ready LLM engineer (novice).", "Employers want judgment and communication — this closes the tier professionally."]
+        ["Repo llm-rag-lab scaffold", "Clean structure; .env.example; .gitignore excludes .env; README venv instructions.", "LLM engineer trainee.", "Secret hygiene before RAG is non-negotiable for hiring."],
+        ["Pinned API dependencies", "openai/anthropic SDK versions pinned; reproducible pip install.", "Applied LLM developer.", "README + requirements proves you ship runnable AI repos."],
+        ["First chat completions script", "One system + user message; print final assistant content end-to-end.", "Day-one LLM integrator.", "Smallest proof you can call a frontier model from code."],
+        ["Streaming tokens to console", "Iterator or async stream; partial tokens visible; note UX value.", "Conversational AI path.", "Matches real chat products, not only blocking calls."],
+        ["Gradio single-prompt demo", "Local URL; screenshot in README; matches bootcamp-style UI.", "Product-facing LLM engineer.", "Standard AI course portfolio piece done cleanly."],
+        ["Prompt templates (no giant literals)", "External files or functions; variables injected safely.", "Maintainable LLM codebase.", "Hiring signal you will not ship unmaintainable prompts."],
+        ["Few-shot structured JSON output", "2–3 examples then new case; json.loads with repair strategy when invalid.", "Structured-output workflows.", "Foundation for tools, agents, evals."],
+        ["Token counting pass", "tiktoken or heuristic; log sizes; tie to cost/latency vocabulary in README.", "Cost-conscious LLM engineer.", "Managers care about bills and context limits."],
+        ["Retries, backoff, user-safe errors", "Handle 429/timeout without crashing the whole app.", "Production-minded junior LLM dev.", "Rare differentiator at novice tier."],
+        ["Embeddings: two strings → cosine similarity", "Normalize vectors; numpy; short notebook or script in repo.", "RAG engineer foundations.", "Proves you know what vector search means mathematically."],
+        ["Chunking utility for .txt", "Chunk size + overlap; metadata dict per chunk; config in one place.", "Document AI / knowledge bases.", "Direct input to vector stores."],
+        ["Local vector store persistence", "Chroma, FAISS, or course default; data dir gitignored; reload path documented.", "Retrieval engineer.", "Standard story: ingest → embed → query."],
+        ["Minimal RAG pipeline", "Top-k retrieve → stuff prompt → answer; print which chunk ids influenced answer.", "RAG application developer.", "Employability core of modern LLM courses."],
+        ["Framework chain (e.g. LangChain LCEL)", "Repeat minimal RAG with framework; README compares to hand-rolled.", "Framework-literate engineer.", "Signals you can join existing codebases."],
+        ["Single tool / function call", "JSON schema tool; handler for math/datetime; log tool args/results.", "Tool-using agents entry.", "Bridge from chat to agent without full LangGraph."],
+        ["Multi-turn Gradio with history trim", "Explicit message list; reset button; respect context limits.", "Conversational AI engineer.", "Shows you understand state, not only single prompts."],
+        ["README model card section", "Model choice, limitations, hallucination + PII policy; link modules studied.", "Interview-ready LLM novice.", "Judgment and communication close the tier."],
+        ["Mocked or recorded API test", "pytest with fixture responses; no real key in CI.", "Test-aware LLM dev.", "Proves you can test non-deterministic systems sensibly."],
+        ["GitHub Action: lint + test", "Optional network skip flag; document in CONTRIBUTING.", "CI maturity.", "Same bar as tier 1 but for AI repo."],
+        ["Portfolio summary block", "Top of README: one paragraph hire pitch for this repo.", "Candidate narrative.", "Recruiter gets the point in 15 seconds."]
       ]
     },
     {
@@ -66,26 +67,26 @@
       hint: "Understands basics · simple tasks with guidance",
       cls: "t3",
       projects: [
-        ["CLI tool: argparse or sys.argv file copy", "Arguments, paths, error messages to stderr.", "Junior Python / automation.", "GitHub proves CLI packaging readiness."],
-        ["Parse CSV without pandas (stdlib csv)", "Rows as dicts, encoding errors.", "ETL foundations.", "Shows you understand what pandas abstracts."],
-        ["Regex extract emails from text file (Sweigart-style)", "Pattern testing, greediness, readable regex.", "Automation specialist path.", "Practical regex beats regex trivia interviews."],
-        ["PHP: contact form → mail() or log to file", "POST, sanitization awareness, basic validation.", "PHP junior.", "Classic Traversy-shaped mini-project."],
-        ["MySQL: two-table schema + manual ER sketch in repo", "PK/FK intuition, naming, 3NF conversation.", "Backend-aware developer.", "Diagram in /docs impresses interviewers."],
-        ["React: fetch JSON from public API; loading state", "useEffect, error UI, empty state.", "Junior React developer.", "Exactly what Sufa-style drills build toward."],
-        ["Flask or FastAPI single GET /health", "Virtualenv, uvicorn/gunicorn mention in README.", "API-first thinking.", "Bridge to ML model serving later."],
-        ["Jupyter: Matplotlib one chart from CSV", "Figure save to /figures, kernel cleared.", "Data analyst storytelling.", "Notebook + exported PNG in GitHub."],
-        ["sklearn: train/test split + one metric on toy data", "fit/predict, random_state, metric choice.", "ML fundamentals (Portilla).", "Notebook with metric printout = portfolio staple."],
-        ["PyTorch: tensor from list + one matmul", "Device-agnostic habits, shape errors reading.", "DL foundations (Neagoie/Bourke).", "Tiny tensor script demystifies framework."],
-        ["Biopython: read one FASTA; print IDs", "SeqIO, file formats, biological ID strings.", "Bioinformatics analyst path.", "Ties to Mariano course directly."],
-        ["GitHub Action: run pytest or python -m compileall", "CI green badge, fail visibility.", "Engineering maturity.", "CI is a hiring filter for serious teams."],
-        ["Dockerfile that runs your CLI (even if chubby)", "COPY, CMD, build/run docs.", "Container literacy.", "Pairs with AWS and deployment courses."],
-        [".env.example without secrets + load dotenv", "Secret hygiene, config separation.", "Security-aware junior.", "Required before any cloud deploy story."],
-        ["pytest: two tests for a pure function", "Arrange/act/assert, tmp_path.", "Quality-minded developer.", "Tests in repo differentiate candidates."],
-        ["Pre-commit or format script (black/ruff optional)", "Automated style, team scale.", "Professional Python.", "One config file + README section."],
-        ["REST: POST JSON echo endpoint", "Request models, 422 validation errors.", "Backend API junior.", "Foundation for React ↔ API projects."],
-        ["Simple password hash with bcrypt or argon2 (demo)", "Never store plaintext, compare hashes.", "Security baseline.", "Shows you heard OWASP basics."],
-        ["Rate limit stub (in-memory counter demo)", "Abuse thinking, 429 response.", "API design awareness.", "Leads to production gateways later."],
-        ["Project board: 5 issues with labels on your repo", "Backlog grooming, scope slicing.", "Agile collaboration.", "Mirrors Jira workflow you already know."]
+        ["Repo bio-data-mini scaffold", "Extends sequence CLI skills; src/ layout; Makefile or scripts/ optional.", "Bio + API junior.", "Named vertical beats scattered tutorial fragments."],
+        ["CLI: ingest UniProt/Swiss-Prot sample", "Document download URL or ship samples/; Biopython SeqIO parse.", "Bioinformatics analyst.", "Direct tie to Mariano/Siddique-style courses."],
+        ["Pandas analysis table", "accession, length, composition columns; CSV export under artifacts/.", "Data-aware bio dev.", "Table-shaped hiring signal."],
+        ["FastAPI /health + /records", "JSON list from SQLite or in-memory seed; CORS note if SPA later.", "API-first engineer.", "Bridge to ML serving and React dashboards."],
+        ["SQLite load + query layer", "Idempotent load script; simple schema with indexes on accession.", "Backend Python junior.", "Faster iteration than cloud DB for portfolio."],
+        ["React fetch demo (or minimal SPA)", "Loading + error + empty states against your API; env-based base URL.", "Junior React developer.", "Exactly what modern frontend interviews expect."],
+        ["Jupyter EDA + exported figure", "One chart from your table; save to figures/; kernel hygiene documented.", "Data analyst storytelling.", "Notebook + PNG in GitHub is a classic portfolio pattern."],
+        ["sklearn split + metric on toy labels", "random_state fixed; one classification metric explained in README.", "ML fundamentals (Portilla-shaped).", "Shows you know train vs test."],
+        ["PyTorch tensor sanity script", "From list → device-agnostic matmul; shapes printed.", "DL foundations (Bourke/Neagoie).", "Demystifies framework before big models."],
+        ["Dockerfile for API service", "uvicorn CMD; build/run in README; non-root user optional.", "Container literacy.", "Pairs with AWS and deploy courses."],
+        ["docker-compose: api + db volume", "depends_on; named volume; one command up.", "Local full-stack habits.", "Standard team onboarding story."],
+        ["pytest for pure functions + TestClient smoke", "Parsing/statistics tests; GET /health returns 200.", "Quality bar for APIs.", "Differentiates from tutorial-only repos."],
+        [".env.example + config module", "No secrets in Git; documented vars for future keys.", "Security-aware junior.", "Required before any cloud story."],
+        ["POST echo with Pydantic validation", "422 errors readable; mirrors real create endpoints.", "Backend API junior.", "Foundation for CRUD and forms."],
+        ["GitHub Action: test on push", "Cache pip; fail fast on main.", "Engineering maturity.", "Second repo with CI shows habit, not accident."],
+        ["Pre-commit: ruff (and format optional)", "One config; README section for contributors.", "Professional Python.", "Team-scale hygiene."],
+        ["Password hashing educational script", "bcrypt or argon2 compare; never plaintext; warning not for prod keys.", "Security baseline.", "OWASP-aware conversation in interview."],
+        ["In-memory rate limit middleware demo", "429 after N requests per IP or key; README scope honest.", "API design awareness.", "Leads to gateways and production throttling."],
+        ["docs/adr-0001-sqlite.md", "Why SQLite here; when you would move to Postgres.", "Growing systems thinker.", "ADR format impresses senior interviewers."],
+        ["README hiring proof section", "Bullets: ingest, API, tests, containers, ML literacy — what this repo proves.", "Candidate positioning.", "Makes skimming hiring managers efficient."]
       ]
     },
     {
@@ -94,26 +95,26 @@
       hint: "Connecting concepts · completes tasks with occasional help",
       cls: "t4",
       projects: [
-        ["Full CRUD PHP + MySQL for one entity", "Prepared statements, CSRF note, flash messages.", "PHP developer.", "Eduonix-style project you can narrate end-to-end."],
-        ["React multi-route app with shared layout", "Router, nested routes, 404 page.", "Frontend developer (React).", "Closer to “job sample” than a single page."],
-        ["Python package layout: src/ + pyproject or setup", "Imports, console_scripts entry point.", "Python developer.", "Shows packaging beyond scripts."],
-        ["Pandas pipeline: clean → aggregate → plot", "Chain clarity, dtypes, missing data.", "Data analyst / BI-adjacent.", "Portilla-level portfolio piece."],
-        ["sklearn pipeline + ColumnTransformer on mixed data", "Categorical encoding, numeric scaling.", "ML engineer (jr).", "Demonstrates scikit-learn composition."],
-        ["PyTorch Dataset + DataLoader on folder of images", "Transforms, batching, shape checks.", "DL engineer (entry).", "Matches bootcamp CNN section prerequisites."],
-        ["Bio: fetch NCBI record; save JSON + summary.txt", "Entrez etiquette, rate limits, retries.", "Bioinformatics analyst.", "Direct Mariano course application."],
-        ["Automate: watch folder → rename + log (Sweigart patterns)", "Scheduling note, idempotent runs.", "Automation specialist.", "Ops-friendly GitHub story."],
-        ["SQLite + SQLAlchemy or raw SQL from Python", "Migrations conversation, ORM vs SQL.", "Backend Python.", "Faster iteration before MySQL cloud."],
-        ["JWT login sketch (even if local only)", "Claims, expiry, refresh conversation.", "Full-stack security awareness.", "Needed before public APIs."],
-        ["React + your API: form POST + optimistic UI rollback", "Error boundaries, toast, retry.", "Product engineer.", "Shows UX maturity beyond tutorials."],
-        ["Feature store lite: Parquet partitions by date", "Columnar format, pandas/pyarrow read.", "Analytics engineer habits.", "Big-data interview talking point."],
-        ["Model card markdown: intent, data, limits", "Responsible ML documentation.", "Data scientist (entry).", "Hiring managers in ML love model cards."],
-        ["Embedding stub: sentence average from word vectors", "Vector space intuition before transformers.", "NLP engineer path.", "Bridge to RAG courses."],
-        ["LangChain-free: chunk text + cosine search numpy", "Token-ish splits, normalization.", "RAG engineer foundations.", "Proves you know what libraries hide."],
-        ["S3 upload script (boto3) with prefix convention", "IAM user least privilege note.", "Cloud engineer path.", "AWS ML course prerequisite muscle."],
-        ["Docker Compose: API + db service", "Networks, depends_on, volume for data.", "Platform-aware developer.", "Standard local full-stack pattern."],
-        ["GitHub Action: lint + test on push", "Matrix optional, cache pip.", "CI engineer habits.", "Green badge on portfolio repo."],
-        ["Observability stub: structured JSON logs", "Correlation id field, log levels.", "SRE-adjacent.", "Pairs with later monitoring projects."],
-        ["ADR-0001 in /docs: why SQLite vs MySQL here", "Architecture decision record format.", "Growing into senior IC.", "Shows systems thinking early."]
+        ["Monorepo or multi-package layout", "api/, web/, shared schemas; root README map.", "Full-stack engineer.", "Shows you organize real products, not single files."],
+        ["Full CRUD REST for one domain entity", "Postgres or MySQL; migrations or documented DDL; FK-safe deletes.", "Backend product engineer.", "Narratable end-to-end app slice."],
+        ["React router + shared layout", "List/detail/create routes; 404 page; lazy load optional.", "Frontend developer (React).", "Closer to job sample than one static page."],
+        ["Pandas ETL script: clean → aggregate → plot", "Saved figure; dtypes and missing data handled explicitly.", "Data analyst / BI-adjacent.", "Portilla-level portfolio piece with story."],
+        ["sklearn Pipeline + ColumnTransformer", "Mixed numeric/categorical; one trained artifact saved.", "ML engineer (junior).", "Composition API fluency."],
+        ["PyTorch Dataset + DataLoader", "Folder of images OR encoded sequences; shapes logged per batch.", "DL engineer (entry).", "Prerequisite depth for CNN sections."],
+        ["NCBI Entrez fetch + JSON artifact", "Rate limits, retries, summary.txt alongside raw JSON.", "Bioinformatics analyst.", "Mariano course applied with engineering care."],
+        ["JWT auth sketch for API", "Login issues token; one protected CRUD route; expiry documented.", "Security-aware full-stack.", "Needed before public agent tools."],
+        ["React form POST with rollback", "Optimistic UI; toast or inline error; retry optional.", "Product engineer.", "UX maturity beyond fetch tutorials."],
+        ["Parquet partitions by date", "feature_store_lite/; pyarrow read example in README.", "Analytics engineer habits.", "Big-data interview talking point."],
+        ["Model card markdown", "Intent, data sources, metrics, failure modes, fairness note if relevant.", "Entry data scientist.", "ML hiring managers ask for this explicitly."],
+        ["Hand-rolled chunk + cosine retrieval", "numpy only; comment what FAISS will replace later.", "RAG engineer foundations.", "Proves you know what libraries hide."],
+        ["boto3 S3 upload utility", "Prefix convention; IAM least-privilege paragraph.", "Cloud engineer path.", "AWS ML course muscle memory."],
+        ["Docker Compose: api + db + (optional admin)", "Networks, healthchecks; one README command.", "Platform-aware developer.", "Standard local prod mirror."],
+        ["GitHub Action: lint + test + optional matrix", "Python version matrix optional; pip cache.", "CI engineer habits.", "Portfolio green pipeline."],
+        ["Structured JSON logging middleware", "request id field; levels; one example log line in README.", "SRE-adjacent.", "Pairs with monitoring later."],
+        ["OpenAPI link + export", "Link /openapi.json; consider Redoc static snapshot.", "API-documenting engineer.", "Contract-first collaboration signal."],
+        ["docs/adr-0002-db-choice.md", "Postgres vs SQLite for this demo; connection pooling note.", "Architecture-minded IC.", "Shows tradeoff thinking."],
+        ["README visuals", "3 screenshots or short GIF: CRUD + chart + API doc.", "Portfolio polish.", "Visual proof reduces recruiter friction."],
+        ["End-to-end demo script", "docs/DEMO.md 5-minute path through app for interviews.", "Interview-ready storyteller.", "You can walk a panel through the system."]
       ]
     },
     {
@@ -122,26 +123,26 @@
       hint: "Independent on common tasks · solid core concepts",
       cls: "t5",
       projects: [
-        ["React dashboard consuming your FastAPI metrics", "Auth header, CORS config, env-based API URL.", "Full-stack engineer.", "Demonstrates end-to-end ownership."],
-        ["PHP admin + Python worker via queue table", "Polling worker, status transitions, locks.", "Full-stack PHP + ML integration.", "Classic enterprise pattern."],
-        ["Train sklearn model; serialize joblib; FastAPI /predict", "Version model filename, input schema.", "ML engineer (jr).", "Shipped inference is the bar."],
-        ["PyTorch training script: argparse, seed, checkpoint", "Train/val loop, early stopping optional.", "Deep learning engineer.", "Neagoie/Bourke capstone-shaped."],
-        ["Transfer learning: freeze backbone; fine-tune head", "LR groups, unfreeze schedule note.", "CV engineer path.", "Strong GitHub signal for vision roles."],
-        ["RAG: local PDFs → chunks → vector DB + query CLI", "Citation of source chunk in output.", "RAG engineer / LLM app dev.", "Donner / 365 Agents applied."],
-        ["Agent tool: function calling wrapper over your API", "Schema for tools, error to model.", "AI engineer (entry).", "Maps to agentic course outcomes."],
-        ["MCP-inspired server: expose one tool to a client README", "Protocol thinking even if minimal.", "Agentic AI developer trajectory.", "Cutting-edge portfolio line."],
-        ["AWS: artifact to S3; Lambda or container invoke", "IAM role least privilege, cold start note.", "Cloud ML engineer path.", "Schuler course hands-on."],
-        ["SageMaker notebook train → model.tar.gz documented", "Hyperparameters table, metric logs.", "AWS ML associate narrative.", "Cert-aligned project."],
-        ["Bio: k-mer features → sklearn classifier + ROC plot", "Biology-appropriate splits, leakage warning.", "Bioinformatics engineer.", "Siddique + Mariano + Portilla combo."],
-        ["Pianalytix-style: reproduce one Kaggle-style notebook cleanly", "README repro steps, data download script.", "Data scientist portfolio.", "Matches 40-projects discipline."],
-        ["Integration tests for API with TestClient", "Fixtures, DB rollback strategy.", "Backend engineer quality bar.", "Teams hire for tests at this level."],
-        ["Terraform or CDK stub for S3 + IAM role (optional)", "IaC mindset, destroy instructions.", "Cloud architect junior skills.", "DevOps conversation starter."],
-        ["Frontend E2E: Playwright one happy path", "Selector stability, CI job optional.", "SDET-aware frontend dev.", "Rare on portfolios — stands out."],
-        ["Dark launch: feature flag env for new model route", "Fallback model path.", "MLOps maturity.", "Mirrors real rollout practice."],
-        ["Data validation: pydantic models shared API/train", "Single source of truth for schema.", "Platform ML engineer.", "Reduces train/serve skew bugs."],
-        ["Cost note in README: $/month estimate for AWS demo", "FinOps awareness.", "Senior IC habits early.", "Managers appreciate business sense."],
-        ["Runbook: incident “model returns 500” steps", "On-call empathy.", "Reliability engineer path.", "Shows production seriousness."],
-        ["Post-mortem template committed for failed experiments", "Blameless tone, timelines.", "Leadership communication.", "Research + industry hybrid signal."]
+        ["React dashboard consuming FastAPI metrics", "Auth header if needed; CORS from env; loading states.", "Full-stack engineer.", "End-to-end ownership on paper and in code."],
+        ["Train sklearn → joblib → /predict route", "Input schema versioned; example curl in README.", "ML engineer (junior).", "Shipped inference is the hiring bar."],
+        ["PyTorch training script (argparse, seed, checkpoints)", "Train/val loop; metric logged; resume note.", "Deep learning engineer.", "Bootcamp capstone-shaped discipline."],
+        ["Transfer learning: frozen backbone + trainable head", "LR schedule note; unfreeze plan documented.", "CV engineer path.", "Strong GitHub signal for vision roles."],
+        ["RAG: local PDFs → chunks → vector DB + CLI", "Answer cites source chunk ids or filenames.", "RAG / LLM app developer.", "Donner / agent courses applied."],
+        ["Agent tool: function calling over your API", "Pydantic tool schema; errors fed back to model safely.", "AI engineer (entry).", "Maps directly to agentic hiring loops."],
+        ["MCP-inspired tool server README", "One tool over HTTP or stdio sketch; protocol summary.", "Agentic AI developer.", "Cutting-edge portfolio line with honesty about scope."],
+        ["AWS script: artifact → S3", "IAM role doc; no keys in repo.", "Cloud ML engineer path.", "Cert-aligned hands-on."],
+        ["Notebook or doc: SageMaker-style train export", "model.tar.gz layout; hyperparameter table.", "AWS ML associate narrative.", "Shows you speak cloud ML."],
+        ["Bio: k-mer features → sklearn + ROC figure", "Leakage warning; biology-appropriate split discussion.", "Bioinformatics engineer.", "Siddique + Portilla combo story."],
+        ["Reproducible Kaggle-style notebook", "scripts/download_data.sh; pinned data version; clean run order.", "Data scientist portfolio.", "Pianalytix-style discipline."],
+        ["API integration tests with fixtures", "DB rollback or transaction per test; auth cases.", "Backend quality bar.", "Teams hire for tests at this level."],
+        ["infra/README Terraform or CDK stub", "S3 + IAM JSON; destroy instructions.", "Cloud architect junior.", "IaC conversation starter."],
+        ["Playwright (or Cypress) one E2E happy path", "Stable selectors; optional CI job.", "SDET-aware frontend dev.", "Rare on portfolios — stands out."],
+        ["Feature-flag second model route", "Env toggles model A/B; fallback path.", "MLOps maturity.", "Mirrors real rollout practice."],
+        ["Shared Pydantic schemas train/serve", "Single source of truth; reduces skew bugs.", "Platform ML engineer.", "Serious ML system pattern."],
+        ["README cost estimate", "Monthly $ ballpark for your AWS demo footprint.", "FinOps-aware engineer.", "Managers notice business sense."],
+        ["Runbook: model returns 500", "docs/runbooks/model-500.md steps.", "Reliability-minded IC.", "Shows production seriousness."],
+        ["Blameless post-mortem for failed experiment", "Use template; one real example committed (sanitized).", "Leadership communication.", "Research + industry hybrid signal."],
+        ["Architecture diagram in README", "Mermaid or image: web → api → db → model.", "Staff-track habits early.", "Panel interviews start here."]
       ]
     },
     {
@@ -150,26 +151,26 @@
       hint: "Handles edge cases · troubleshoots and optimizes",
       cls: "t6",
       projects: [
-        ["Optimize API latency: profiling + batch inference", "torch.no_grad, batching, async optional.", "ML performance engineer.", "Numbers in README before/after."],
-        ["Handle skewed classes: metrics beyond accuracy", "PR-AUC, calibration curve.", "Serious data scientist.", "Interview depth for imbalanced domains."],
-        ["Data leakage audit checklist applied to one project", "Time-based split proof.", "Trustworthy ML.", "Bio + finance + HR models need this."],
-        ["GPU OOM playbook: gradient accumulation demo", "Mixed precision flag, checkpointing.", "DL engineer production.", "Shows you debug training at scale."],
-        ["Distributed data loading: num_workers tuning doc", "Reproducibility with workers > 0.", "PyTorch at work.", "Real CV training pain solved."],
-        ["Streaming ingestion: chunk reader + backpressure note", "Memory bounds, generator patterns.", "Data engineer skills.", "Scales to larger automation."],
-        ["Idempotent workers: exactly-once-ish with dedupe key", "At-least-once queues, primary keys.", "Backend architect habits.", "PHP/Python queue projects level up."],
-        ["Secrets rotation story: parameter store vs .env", "No secrets in Git ever.", "Security engineer collaboration.", "Cloud ML role requirement."],
-        ["Canary deploy story for two model versions", "Traffic split pseudocode or feature flag.", "MLOps engineer.", "Upper-tier ML org pattern."],
-        ["Drift monitoring sketch: PSI or KS on one feature", "Alert threshold, weekly job.", "ML observability.", "Senior DS differentiator."],
-        ["Explainability: SHAP or permutation importance on sklearn", "When not to trust explanations.", "Responsible AI.", "Regulated industry talking point."],
-        ["React error boundary + API circuit breaker pattern", "Retry budgets, user messaging.", "Staff frontend patterns.", "Resilience display."],
-        ["SQL injection + XSS prevention audit on PHP app", "Prepared statements audit list.", "AppSec-aware full-stack.", "PHP hire bar."],
-        ["Rate limit + WAF note for public endpoints", "IP vs token buckets.", "Platform security.", "Before exposing agent tools."],
-        ["Embeddings cache with disk LRU for RAG", "Cost control, TTL.", "LLM systems engineer.", "Production RAG economics."],
-        ["Multi-index hybrid search: BM25 + vector fusion", "Ranking intuition.", "Search engineer path.", "Beyond naive vector-only RAG."],
-        ["Bio: negative sampling design for sequence task", "Biological plausibility of negatives.", "Comp bio seriousness.", "Research engineer signal."],
-        ["Notebook purge: pre-commit strips outputs (optional)", "Git hygiene for ipynb.", "Team-ready DS.", "Reduces repo bloat and leaks."],
-        ["Load test: locust or k6 on /predict with p95 goal", "SLO thinking.", "Performance SRE.", "Numbers beat claims."],
-        ["Post-release retrospective with metrics vs hypothesis", "Scientific method in product.", "Principal IC trajectory.", "Ties learning to outcomes."]
+        ["Profile and optimize /predict latency", "Before/after p95; batching or torch.no_grad; numbers in README.", "ML performance engineer.", "Evidence beats claims."],
+        ["Skewed-class metrics + calibration", "PR-AUC, calibration curve notebook; not only accuracy.", "Serious data scientist.", "Depth for imbalanced domains."],
+        ["Data leakage audit applied", "Time-based split proof; checklist doc checked in.", "Trustworthy ML.", "Bio/finance/HR models need this story."],
+        ["GPU OOM playbook doc + small demo", "Gradient accumulation; AMP flag; checkpointing.", "DL production engineer.", "Training debug at scale."],
+        ["DataLoader workers tuning note", "Reproducibility with num_workers > 0; benchmark snippet.", "PyTorch practitioner.", "Real CV training pain addressed."],
+        ["Streaming ingestion with backpressure", "Generator reader; memory bound stated.", "Data engineer skills.", "Scales automation beyond load-all."],
+        ["Idempotent worker + dedupe key", "At-least-once queue pattern; SQLite or table lock example.", "Backend architect habits.", "Queue projects level up."],
+        ["Secrets rotation story", "Parameter Store vs .env; still no secrets in Git.", "Cloud security collaboration.", "Enterprise ML requirement."],
+        ["Canary routing for two model versions", "Feature flag % or path split implemented or rigorously stubbed with code.", "MLOps engineer.", "Upper-tier ML org pattern."],
+        ["Drift monitoring sketch", "PSI or KS on one feature; weekly cron script.", "ML observability.", "Senior DS differentiator."],
+        ["SHAP or permutation importance", "Summary plot to figures/; when not to trust it.", "Responsible AI.", "Regulated industry talking point."],
+        ["React error boundary + API retry budget", "User messaging; exponential backoff cap.", "Resilient frontend.", "Staff frontend patterns mini."],
+        ["Security audit pass on your API", "SQLi/XSS/CORS checklist; fixes or documented accepted risk.", "AppSec-aware full-stack.", "PHP stack if used gets same pass."],
+        ["Rate limit + abuse notes for public endpoints", "Token bucket or IP limit; README threat model one paragraph.", "Platform security.", "Before exposing agent tools publicly."],
+        ["RAG embedding disk LRU cache", "TTL; cost control paragraph with rough savings.", "LLM systems engineer.", "Production RAG economics."],
+        ["Hybrid search prototype", "BM25 + vector fusion simple ranker; intuition doc.", "Search engineer path.", "Beyond naive vector-only RAG."],
+        ["Bio negative sampling design doc", "Plausible negatives; link to model task.", "Comp bio seriousness.", "Research engineer signal."],
+        ["Notebook hygiene automation", "nbstripout or pre-commit; policy in README.", "Team-ready DS.", "Reduces bloat and accidental data leaks."],
+        ["Load test: k6 or locust", "State p95 SLO goal for /predict; attach summary.", "Performance SRE.", "Numeric proof for interviews."],
+        ["Retrospective: metrics vs hypothesis", "One-pager after an experiment; scientific method visible.", "Principal IC trajectory.", "Ties learning to outcomes."]
       ]
     },
     {
@@ -178,26 +179,26 @@
       hint: "Deep understanding · designs systems / solutions",
       cls: "t7",
       projects: [
-        ["System design doc: React + PHP + Python ML (C4-ish)", "Context, container, deployment diagrams.", "Software architect path.", "PDF or Mermaid in /docs."],
-        ["End-to-end AWS: train job + endpoint + client auth", "IAM boundaries, VPC note if used.", "Cloud ML platform engineer.", "Schuler + PyTorch combined story."],
-        ["Event-driven: S3 trigger → processing → DynamoDB state", "Failure retries, DLQ concept.", "Cloud-native architect.", "Scalable ingestion pattern."],
-        ["Multi-tenant SaaS sketch: org_id on all rows", "Isolation strategy, RLS or app-level.", "Product architect.", "Enterprise hire signal."],
-        ["Agent orchestration: planner + tool router design", "Failure modes, human-in-loop hook.", "AI architect.", "365 Careers + Donner synthesis."],
-        ["MCP production: authn on tool server + audit log", "Token scopes, rate limits.", "Agentic platform engineer.", "Emerging role — rare portfolio."],
-        ["Fine-tune small LM on domain JSONL; eval harness", "Train/val contamination guard.", "Applied research engineer.", "Donner QLoRA narrative."],
-        ["Bio pipeline: Snakemake or Makefile orchestration", "Reproducible HPC-friendly steps.", "Comp bio engineer.", "Lab + industry crossover."],
-        ["Online learning sketch: incremental model update job", "When forbidden vs allowed.", "ML systems researcher.", "Advanced DS/ML org topic."],
-        ["Cost/perf tradeoff paper in repo for one model", "Business + engineering joint decision.", "Head of ML trajectory.", "Executive-readable summary."],
-        ["Disaster recovery: RPO/RTO for model + data", "Backups, restore drill checklist.", "Infrastructure architect.", "Mission-critical ML."],
-        ["Compliance appendix: GDPR-style data deletion path", "Model retrain implications.", "Privacy engineer collaboration.", "Regulated industries."],
-        ["Blue/green or rolling deploy for API + model swap", "Health checks, rollback.", "DevOps architect.", "Zero-downtime story."],
-        ["Cross-region replication note for artifacts", "Latency vs consistency.", "Global platform engineer.", "AWS advanced narrative."],
-        ["Chaos test: kill worker mid-job; recovery behavior", "Idempotency proof.", "Resilience architect.", "Netflix-grade thinking mini."],
-        ["Formal threat model STRIDE one-pager for agent tool", "Spoofing, tampering, repudiation…", "AI security architect.", "AI safety hiring trend."],
-        ["Portfolio monorepo: shared types OpenAPI generated", "Client SDK generation story.", "Platform full-stack architect.", "Big-tech pattern shrunk."],
-        ["Research repro: pick paper’s toy experiment; cite", "Honest partial repro ok with notes.", "Research scientist path.", "PhD-adjacent signal."],
-        ["Mentor kit: onboarding doc for your own project", "How to run, test, deploy.", "Tech lead skills.", "Shows you scale yourself."],
-        ["Public tech talk outline + slides PDF in repo", "20-minute narrative arc.", "Distinguished engineer communication.", "Recruiters share talks."]
+        ["C4-style system design in docs/", "Context/container diagrams; React + API + ML + data paths.", "Software architect path.", "PDF or Mermaid checked in."],
+        ["AWS: train job + endpoint + authenticated client", "IAM boundaries; VPC note if used; sequence diagram.", "Cloud ML platform engineer.", "Schuler + PyTorch combined narrative."],
+        ["Event-driven ingestion design", "S3 trigger → process → state store; DLQ and retry narrative.", "Cloud-native architect.", "Scalable ingestion pattern."],
+        ["Multi-tenant data sketch", "org_id everywhere; RLS or app-level isolation section.", "Product architect.", "Enterprise hire signal."],
+        ["Agent orchestration design", "Planner + tool router; failure modes; human-in-loop hook.", "AI architect.", "365 Careers + Donner synthesis."],
+        ["Hardened MCP / tool server outline", "Authn tokens; audit log; rate limits documented.", "Agentic platform engineer.", "Rare, honest advanced portfolio."],
+        ["Fine-tune small LM + eval harness", "JSONL data; contamination guard; metrics table.", "Applied research engineer.", "QLoRA-style story without hype."],
+        ["Snakemake or Makefile bio pipeline", "Three reproducible steps; conda/env file.", "Comp bio engineer.", "Lab + industry crossover."],
+        ["Online learning constraints memo", "When incremental updates allowed vs forbidden.", "ML systems researcher.", "Advanced org topic."],
+        ["Cost/perf tradeoff executive memo", "One page for a fictional exec; ties to your model.", "Head-of-ML thinking.", "Business + engineering joint decision."],
+        ["DR: RPO/RTO for model + data", "Backup + restore drill checklist.", "Infrastructure architect.", "Mission-critical ML story."],
+        ["GDPR-style deletion path", "Data removal + retrain implications.", "Privacy collaboration.", "Regulated industries."],
+        ["Blue/green or rolling deploy narrative", "Health checks; rollback; tied to your API.", "DevOps architect.", "Zero-downtime language."],
+        ["Cross-region artifact note", "Latency vs consistency tradeoffs.", "Global platform engineer.", "AWS advanced narrative."],
+        ["Chaos / failure injection plan", "Kill worker mid-job; prove idempotency.", "Resilience architect.", "Netflix-grade thinking exercise."],
+        ["STRIDE threat model for agent tools", "One page; mitigations listed.", "AI security architect.", "AI safety hiring trend."],
+        ["OpenAPI-generated client types", "Shared contract story; codegen steps in README.", "Platform full-stack architect.", "Big-tech pattern shrunk."],
+        ["Paper reproduction (partial allowed)", "Cited experiment; honest gaps documented.", "Research scientist path.", "PhD-adjacent signal."],
+        ["docs/MENTORING.md", "How a new dev runs, tests, deploys your system.", "Tech lead skills.", "You scale beyond yourself."],
+        ["Tech talk outline + slides PDF", "20-minute arc in talks/; abstract included.", "Distinguished communication.", "Artifact recruiters can forward."]
       ]
     },
     {
@@ -206,26 +207,26 @@
       hint: "Authority level · teaches, innovates, decides",
       cls: "t8",
       projects: [
-        ["Recorded workshop: teach your tier-5 project live", "Agenda, exercises, repo tags per lesson.", "Principal engineer / educator brand.", "YouTube or unlisted counts."],
-        ["Open-source PR merged to a real project (not typo)", "Issue discussion, review response.", "OSS maintainer credibility.", "Link PR in portfolio site."],
-        ["Published package on PyPI or npm (scoped ok)", "Semantic release, changelog.", "Platform engineer authority.", "Downloads are social proof."],
-        ["Conference-style abstract + poster PDF", "Novel angle on your bio or RAG work.", "Research leader.", "Academic + industry bridge."],
-        ["RFC for replacing part of your stack with new design", "Alternatives, tradeoffs, decision.", "Staff+ engineer.", "How senior orgs decide."],
-        ["Run a cohort: 3 people ship tier-3 projects", "Curriculum you wrote, retro notes.", "Engineering manager / mentor.", "Leadership without title."],
-        ["Patent-style invention disclosure (redacted) for idea", "Prior art search summary.", "Innovation track.", "Even internal-style doc shows rigor."],
-        ["Set industry benchmark on small public dataset", "Leaderboard submission + code.", "Research engineer top tier.", "Name on leaderboard = credential."],
-        ["Define SLI/SLO for your toy product + error budget", "Quarterly review template.", "VP Eng thinking exercise.", "SRE leadership."],
-        ["Multi-repo template generators for your patterns", "Cookiecutter or copier.", "Platform team builder.", "Scales org, not just you."],
-        ["Security review you led on a friend’s project", "Findings ranked, fixes tracked.", "AppSec leader.", "Consulting-style deliverable."],
-        ["Economics model: unit economics of your API", "Margin per 1M requests.", "Founder CTO skill.", "Startup pitch appendix."],
-        ["Board-level one-pager: why invest in ML platform", "Risk, ROI, timeline.", "CTO communication.", "Executive fluency."],
-        ["Create certification-style exam for your stack (10 Q)", "Rubric + answers private branch.", "Curriculum authority.", "Training business optional."],
-        ["Advise hypothetical startup: architecture review video", "30-minute Loom, structured.", "Fractional CTO signal.", "Consulting portfolio."],
-        ["Translate your project to second spoken language README", "i18n empathy for global teams.", "Global engineering leader.", "Inclusive leadership."],
-        ["Ethics memo: dual-use concerns of your agent tools", "Mitigations, policy hooks.", "Responsible AI leader.", "Government/regulated orgs."],
-        ["Governance: model approval checklist for releases", "Legal + eng signoff boxes.", "Chief AI officer trajectory.", "Enterprise AI scale."],
-        ["Succession doc: how someone else runs your repos", "Bus factor elimination.", "Sustainable expert.", "True seniority marker."],
-        ["Vision essay: where your stack is in 5 years", "Links to papers/products.", "Industry thought leader.", "Personal brand peak."]
+        ["Recorded workshop on your shipped project", "Agenda, exercises, repo tags per lesson; YouTube or unlisted.", "Principal engineer / educator brand.", "Teaching proof beats claiming expertise."],
+        ["Non-trivial OSS PR merged", "Issue thread + review responses; link in profile README.", "OSS credibility.", "Maintainers vouch for you."],
+        ["Package on PyPI or npm (scoped ok)", "Semantic version policy; CHANGELOG automation note.", "Platform authority.", "Downloads are social proof."],
+        ["Conference abstract + poster PDF", "Novel angle on bio, RAG, or agents.", "Research leader.", "Academic + industry bridge."],
+        ["RFC for stack replacement", "Options, tradeoffs, decision, rollout.", "Staff+ engineer.", "How senior orgs decide."],
+        ["Mentor cohort: 3 people ship tier-3+", "Your curriculum outline + retrospective notes.", "Engineering manager path.", "Leadership without title."],
+        ["Invention disclosure (redacted)", "Prior art summary; problem statement.", "Innovation track.", "Rigor even if confidential."],
+        ["Public benchmark or leaderboard entry", "Reproducible repo + submission evidence.", "Top-tier research engineer.", "Named result is credential."],
+        ["SLI/SLO + error budget for demo product", "Quarterly review template included.", "SRE leadership.", "VP Eng thinking exercise done seriously."],
+        ["Template generator (Cookiecutter/Copier)", "Your service pattern encoded; usage README.", "Platform builder.", "Scales organizations."],
+        ["Security review you led", "Findings ranked; remediation tracked (friend project ok).", "AppSec leader.", "Consulting-style deliverable."],
+        ["API unit economics spreadsheet", "$/1M requests; margin notes in docs/.", "Founder CTO skill.", "Startup pitch appendix."],
+        ["Board-level ML platform one-pager", "Risk, ROI, timeline; executive tone.", "CTO communication.", "Fluent in business language."],
+        ["Cert-style exam for your stack (10Q)", "Rubric in repo; answers in private branch or local only.", "Curriculum authority.", "Training business optional."],
+        ["Architecture review video script + Loom", "30-minute structured review of hypothetical startup.", "Fractional CTO signal.", "Consulting portfolio piece."],
+        ["Flagship README in second language", "Professional translation; glossary for technical terms.", "Global engineering leader.", "Inclusive leadership signal."],
+        ["Ethics memo: dual-use agent tools", "Mitigations; policy hooks; citations.", "Responsible AI leader.", "Government / regulated orgs."],
+        ["Model release governance checklist", "Legal + eng signoff boxes.", "Chief AI officer trajectory.", "Enterprise AI scale."],
+        ["docs/SUCCESSION.md", "Bus factor elimination; how someone runs all repos.", "Sustainable expert.", "True seniority marker."],
+        ["Five-year stack vision essay", "Links to papers and products; published markdown.", "Industry thought leader.", "Personal brand peak with substance."]
       ]
     }
   ];
@@ -243,10 +244,10 @@
    */
   function buildLLMPrompt(tier, globalIndex, localNum, title, learn, roles, gh) {
     return (
-      "You are my technical mentor. I'm building a public GitHub portfolio project as part of a compounding curriculum (160 projects across 8 skill levels).\n\n" +
-      "PROJECT\n" +
-      "-------\n" +
-      "• Project code: " +
+      "You are my technical mentor. I'm building a public GitHub portfolio as part of a hire-aligned curriculum (160 milestones across 8 tiers; each tier is one flagship arc).\n\n" +
+      "MILESTONE\n" +
+      "---------\n" +
+      "• Milestone code: " +
       tier.id +
       "." +
       String(localNum).padStart(2, "0") +
@@ -339,7 +340,7 @@
     html += '<h2 class="tier-name">' + esc(tier.name) + "</h2>";
     html += '<p class="tier-hint">' + esc(tier.hint) + "</p>";
     html += "</div>";
-    html += '<span class="tier-count">20 projects · prompts below</span>';
+    html += '<span class="tier-count">20 hire-aligned milestones · prompts below</span>';
     html += "</header>";
     html += '<div class="tier-projects">';
 
@@ -383,10 +384,10 @@
       html += '<h3 class="tier-name">' + esc(tier.name) + "</h3>";
       html += '<p class="tier-hint">' + esc(tier.hint) + "</p>";
       html += "</div>";
-      html += '<span class="tier-count">20 projects</span>';
+      html += '<span class="tier-count">20 milestones</span>';
       html += "</header>";
       html +=
-        '<p class="tier-prompt-link" style="font-size:11px;color:var(--text3);padding:10px 16px 0;margin:0;background:var(--bg2)">Copy-paste LLM mentor prompts (per project): <a href="tier-' +
+        '<p class="tier-prompt-link" style="font-size:11px;color:var(--text3);padding:10px 16px 0;margin:0;background:var(--bg2)">Copy-paste LLM mentor prompts (per milestone): <a href="tier-' +
         tier.id +
         '.html" style="color:var(--teal)">tier-' +
         tier.id +

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tier 2 — Novice — Milestones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="site-brand-link">Kel — Toolkit</a>
+  <a href="career_threshold_tracker.html">Tracker</a>
+  <a href="curriculum.html" class="nav-hi">100 projects</a>
+  <a href="capstones.html">Udemy capstones</a>
+</nav>
+
+<nav class="tier-tabs" aria-label="Jump to tier">
+  <a class="tier-tab tier-tab-overview" href="curriculum.html">Overview</a>
+  <a class="tier-tab" href="tier-1.html" title="Tier 1 — No experience / unfamiliar">1</a>
+  <span class="tier-tab is-active" aria-current="page" title="Tier 2 — Novice">2</span>
+  <a class="tier-tab" href="tier-3.html" title="Tier 3 — Beginner">3</a>
+  <a class="tier-tab" href="tier-4.html" title="Tier 4 — Beginner–intermediate">4</a>
+  <a class="tier-tab" href="tier-5.html" title="Tier 5 — Intermediate">5</a>
+  <a class="tier-tab" href="tier-6.html" title="Tier 6 — Upper intermediate">6</a>
+  <a class="tier-tab" href="tier-7.html" title="Tier 7 — Advanced">7</a>
+  <a class="tier-tab" href="tier-8.html" title="Tier 8 — Expert">8</a>
+</nav>
+
+<div class="sub-hero">
+  <h1>Tier 2 — Novice</h1>
+  <p>Just started · can follow instructions, not independent yet · Flagship arc: <strong>llm-rag-lab</strong> (venv → minimal RAG in one repo). Each row has a <strong>Copy prompt</strong>.</p>
+</div>
+
+<div id="tier-mount"></div>
+
+<p class="save-note" style="margin-top:1.5rem"><a href="tier-1.html" class="text-link">← Tier 1</a> · <a href="tier-3.html" class="text-link">Tier 3 →</a> · <a href="curriculum.html" class="text-link">All tiers</a></p>
+
+<script src="compound_curriculum.js"></script>
+<script>
+  renderTierPage(2, "tier-mount");
+</script>
+</body>
+</html>
